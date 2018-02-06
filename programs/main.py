@@ -78,20 +78,24 @@ if __name__ == '__main__':
 
         c = conn.cursor()
 
-        program = 'Chrome'
+        program = "%" + "Chrome" + "%"
 
-        c.execute(new_query, ['%'+program+'%'])
+        c.execute(new_query, [program])
 
-        record = c.fetchall()[0]
+        try:
+            record = c.fetchall()
 
-        filepath = record[0]
-        print (filepath)
+            filepath = record[0]
+            print (filepath)
+
+            os.chdir(filepath)
+            for file in glob.glob("*.exe"):
+                print(file)
+
+            program = filepath + "\\" + file
+            print(program)
+            subprocess.Popen([program])
+        except Exception as e:
+            print(e)
 
 
-        os.chdir(filepath)
-        for file in glob.glob("*.exe"):
-            print (file)
-
-        program = filepath+ "\\" +file
-        print(program)
-        subprocess.Popen([program])
