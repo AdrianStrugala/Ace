@@ -1,11 +1,12 @@
+import glob
+import os
 import sqlite3 as sql
-import winreg
 import subprocess
-import glob, os
+import winreg
 
 
 def create_table(conn):
-    sql_create_table = """ CREATE TABLE IF NOT EXISTS programs (
+    sql_create_table = """ CREATE TABLE IF NOT EXISTS src (
                                         id integer PRIMARY KEY,
                                         name text NOT NULL,
                                         path text
@@ -14,13 +15,13 @@ def create_table(conn):
     try:
         c = conn.cursor()
         c.execute(sql_create_table)
-        print("Created table programs")
+        print("Created table src")
     except Exception as e:
         print(e)
 
 
 def insert_row(conn, name, path):
-    sql_insert_row = """INSERT INTO programs (name, path) VALUES (?, ?)"""
+    sql_insert_row = """INSERT INTO src (name, path) VALUES (?, ?)"""
 
     try:
         c = conn.cursor()
@@ -71,15 +72,15 @@ if __name__ == '__main__':
 
 
         c = conn.cursor()
-        c.execute("SELECT * FROM programs")
+        c.execute("SELECT * FROM src")
         rows = c.fetchall()
 
-        new_query = """SELECT path FROM programs WHERE name LIKE ?"""
+        new_query = """SELECT path FROM src WHERE name LIKE ?"""
 
-        c = conn.cursor()
+
 
         program = "%" + "Chrome" + "%"
-
+        c = conn.cursor()
         c.execute(new_query, [program])
 
         try:
