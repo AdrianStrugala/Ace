@@ -40,6 +40,7 @@ def get_program_path(name):
     with sql.connect(db) as conn:
         select_program = """SELECT path FROM src WHERE name LIKE ?"""
 
+        name = '%' + name + '%'
         try:
             c = conn.cursor()
             c.execute(select_program, [name])
