@@ -41,17 +41,12 @@ def get_program_path(name):
         select_program = """SELECT path FROM src WHERE name LIKE ?"""
 
         name = '%' + name + '%'
-        try:
-            c = conn.cursor()
-            c.execute(select_program, [name])
-            print("Inserted " + name)
-            print(c.lastrowid)
 
+        c = conn.cursor()
+        c.execute(select_program, [name])
+        print("Opening " + name)
+        print(c.lastrowid)
 
-            record = c.fetchall()
+        record = c.fetchall()
 
-            filepath = record[0]
-            print(filepath)
-
-        except Exception as e:
-            print(e)
+        return record[0]
