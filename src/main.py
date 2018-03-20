@@ -42,9 +42,9 @@ def case(*args):
 
 if __name__ == '__main__':
 
-    user_choice = 0
+    user_choice = -1
 
-    while user_choice != -1:
+    while user_choice != 0:
 
         print_user_options()
 
@@ -74,5 +74,7 @@ if __name__ == '__main__':
 
             if case(0):
                 print("Exiting")
+                break
+
             print("Unrecognized option.")
             break
