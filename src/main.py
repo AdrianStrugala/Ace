@@ -7,6 +7,7 @@ import sys
 import win32com.client
 import getpass
 import glob
+import webbrowser
 
 
 def insert_programs_from_path(path):
@@ -25,6 +26,7 @@ def print_user_options():
     print("Make your choice:")
     print("1 - Create Database")
     print("2 - Open Program")
+    print("3 - Open Website")
     print("0 - Exit")
 
 
@@ -70,6 +72,20 @@ if __name__ == '__main__':
                 program_to_open = input('Type name of the program: ')
                 program_path = repository.get_program_path(program_to_open)
                 subprocess.Popen([program_path])
+                break
+
+            if case(3):
+                print("Opening website...")
+                url_to_open = input('Write the url: ')
+
+                if(url_to_open[0] != 'w' or url_to_open[1] != 'w' or url_to_open[2] != 'w' or url_to_open[3] != '.'):
+                    url_to_open = "www." + url_to_open
+
+                try:
+                    webbrowser.get('windows-default').open(url_to_open)
+                except expression as identifier:
+                    print("Cannot open" + url_to_open)
+                
                 break
 
             if case(0):
