@@ -8,6 +8,7 @@ import win32com.client
 import getpass
 import glob
 import webbrowser
+import psutil
 
 
 def insert_programs_from_path(path):
@@ -27,8 +28,8 @@ def print_user_options():
     print("1 - Create Database")
     print("2 - Open Program")
     print("3 - Open Website")
+    print("4 - Close Program")
     print("0 - Exit")
-
 
 class switch(object):
     value = None
@@ -82,10 +83,19 @@ if __name__ == '__main__':
                     url_to_open = "www." + url_to_open
 
                 try:
-                    webbrowser.get('windows-default').open(url_to_open)
-                except expression as identifier:
+                    webbrowser.get('windows-default').open(url_to_open, new=0)
+                except:
                     print("Cannot open" + url_to_open)
                 
+                break
+
+            if case(4):
+                print("Closing Program...")
+                program_to_close = input('Type name of the program: ')
+
+                for process in (process for process in psutil.process_iter() if program_to_close in process.name()):
+                    process.kill()
+                    
                 break
 
             if case(0):
