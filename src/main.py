@@ -27,8 +27,10 @@ def print_user_options():
     print("Make your choice:")
     print("1 - Create Database")
     print("2 - Open Program")
-    print("3 - Open Website")
-    print("4 - Close Program")
+    print("3 - Close Program")
+    print("4 - Open Website")
+    print("5 - Search in Google")
+    
     print("0 - Exit")
 
 class switch(object):
@@ -76,6 +78,15 @@ if __name__ == '__main__':
                 break
 
             if case(3):
+                print("Closing Program...")
+                program_to_close = input('Type name of the program: ')
+
+                for process in (process for process in psutil.process_iter() if program_to_close in process.name()):
+                    process.kill()
+                    
+                break
+
+            if case(4):
                 print("Opening website...")
                 url_to_open = input('Write the url: ')
 
@@ -89,13 +100,17 @@ if __name__ == '__main__':
                 
                 break
 
-            if case(4):
-                print("Closing Program...")
-                program_to_close = input('Type name of the program: ')
+            if case(5):
+                print("Searching in Google...")
+                googleUrl = "http://google.com/?#q="
 
-                for process in (process for process in psutil.process_iter() if program_to_close in process.name()):
-                    process.kill()
-                    
+                phrase_to_search = input('What are you looking for: ')
+
+                try:
+                    webbrowser.get('windows-default').open(googleUrl+phrase_to_search, new=0)
+                except:
+                    print("Cannot open" + googleUrl)
+                
                 break
 
             if case(0):
