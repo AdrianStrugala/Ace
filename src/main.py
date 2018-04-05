@@ -1,30 +1,17 @@
 import repository
-import subprocess
-import winreg
-import os
-import subprocess
-import sys
-import win32com.client
-import getpass
+import speech
+import controller
 import glob
-import webbrowser
-import psutil
+import os
+import win32com
 
+def sendMessage(text):
+    speech.say(text, muteFlag)
+    print(text)
 
-def insert_programs_from_path(path):
-    for file in glob.iglob(path + '/**/*.lnk', recursive=True):
-        fullpath = os.path.join(path, file)
-        shell = win32com.client.Dispatch("WScript.Shell")
-        shortcut = shell.CreateShortCut(fullpath)
-
-        name = (file[file.rindex('\\') + 1:]).split(".", 1)[0]
-
-        repository.insert_program(name, shortcut.Targetpath)
 
 
 def print_user_options():
-    print("")
-    print("Make your choice:")
     print("1 - Create Database")
     print("2 - Open Program")
     print("3 - Close Program")
@@ -47,75 +34,74 @@ def case(*args):
 
 if __name__ == '__main__':
 
+    global muteFlag
+    muteFlag = False
+
+    speech = speech.Speech()
+    controller = controller.Controller()
+
+    sendMessage("Hello. My name is Ace!")
+
     user_choice = -1
 
     while user_choice != 0:
-
+        print("")
+        sendMessage("Make your choice")
         print_user_options()
-
+        
         try:
             user_choice = int(input('Choice: '))
         except ValueError:
-            print("Not a number")
+            sendMessage("Not a number")
 
         while switch(user_choice):
             if case(1):
-                print("Creating Database...")
-                path = r'C:\ProgramData\Microsoft\Windows\Start Menu\Programs'
-                path2 = 'C:\\Users\\' + getpass.getuser() + r'\AppData\Roaming\Microsoft\Windows\Start Menu\Programs'
-
-                repository.create_table()
-
-                insert_programs_from_path(path)
-                insert_programs_from_path(path2)
+                sendMessage("Creating Database...")
+                try:
+                    controller.create_database()
+                except:
+                    sendMessage("Cannot create database")
                 break
 
             if case(2):
-                print("Opening Program...")
                 program_to_open = input('Type name of the program: ')
-                program_path = repository.get_program_path(program_to_open)
-                subprocess.Popen([program_path])
+                sendMessage("Opening Program..." + program_to_open)
+                try:
+                    controller.open_program(program_to_open)
+                except:
+                    sendMessage("Cannot open" + program_to_open)
                 break
 
             if case(3):
-                print("Closing Program...")
                 program_to_close = input('Type name of the program: ')
-
-                for process in (process for process in psutil.process_iter() if program_to_close in process.name()):
-                    process.kill()
-                    
+                sendMessage("Closing Program..." + program_to_close)
+                try:
+                    controller.close_program(program_to_close)
+                except:
+                    sendMessage("Cannot close" + program_to_close)
                 break
 
             if case(4):
-                print("Opening website...")
                 url_to_open = input('Write the url: ')
-
-                if(url_to_open[0] != 'w' or url_to_open[1] != 'w' or url_to_open[2] != 'w' or url_to_open[3] != '.'):
-                    url_to_open = "www." + url_to_open
-
+                sendMessage("Opening website..." + url_to_open)
                 try:
-                    webbrowser.get('windows-default').open(url_to_open, new=0)
+                    controller.open_website(url_to_open)
                 except:
-                    print("Cannot open" + url_to_open)
-                
+                    sendMessage("Cannot navigate to" + url_to_open)
                 break
 
             if case(5):
-                print("Searching in Google...")
-                googleUrl = "http://google.com/?#q="
-
                 phrase_to_search = input('What are you looking for: ')
-
+                sendMessage("Searching in Google for ..." + phrase_to_search)
                 try:
-                    webbrowser.get('windows-default').open(googleUrl+phrase_to_search, new=0)
+                    controller.search_in_google(phrase_to_search)
                 except:
-                    print("Cannot open" + googleUrl)
-                
+                    sendMessage("Cannot find " + phrase_to_search + " in google")
                 break
 
             if case(0):
-                print("Exiting")
+                sendMessage("Exiting")
                 break
 
-            print("Unrecognized option.")
+            sendMessage("Unrecognized option.")
             break
