@@ -1,14 +1,15 @@
 import repository
 import speech
 import controller
+import communication
 import glob
 import os
 import win32com
 
 def sendMessage(text):
-    speech.say(text, muteFlag)
-    print(text)
-
+    controller.write(text)
+    #communication.to_say = text
+    speech.say(text)
 
 
 def print_user_options():
@@ -69,7 +70,7 @@ if __name__ == '__main__':
                 try:
                     controller.open_program(program_to_open)
                 except:
-                    sendMessage("Cannot open" + program_to_open)
+                    sendMessage("Cannot open " + program_to_open)
                 break
 
             if case(3):

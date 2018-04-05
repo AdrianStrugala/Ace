@@ -16,6 +16,8 @@ class Controller (threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
 
+    def write(self, text):
+        print (text)
 
     def create_database(self):       
         path = r'C:\ProgramData\Microsoft\Windows\Start Menu\Programs'

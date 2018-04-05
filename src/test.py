@@ -1,42 +1,34 @@
 import threading
 import time
 
-class myThread (threading.Thread):
-   def __init__(self, threadID, name, counter):
-      threading.Thread.__init__(self)
-      self.threadID = threadID
-      self.name = name
-      self.counter = counter
-   def run(self):
-      print( "Starting " + self.name)
-      # Get lock to synchronize threads
-     # threadLock.acquire()
-      print_time(self.name, self.counter, 3)
-      # Free lock to release next thread
-     # threadLock.release()
 
-def print_time(threadName, delay, counter):
-   while counter:
-      time.sleep(delay)
-      print( "%s: %s" % (threadName, time.ctime(time.time())))
-      counter -= 1
+class ThreadingExample(object):
+    """ Threading example class
+    The run() method will be started and it will run in the background
+    until the application exits.
+    """
 
-threadLock = threading.Lock()
-threads = []
+    def __init__(self, interval=1):
+        """ Constructor
+        :type interval: int
+        :param interval: Check interval, in seconds
+        """
+        self.interval = interval
 
-# Create new threads
-thread1 = myThread(1, "Thread-1", 1)
-thread2 = myThread(2, "Thread-2", 2)
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True                            # Daemonize thread
+        thread.start()                                  # Start the execution
 
-# Start new Threads
-thread1.start()
-thread2.start()
+    def run(self):
+        """ Method that runs forever """
+        while True:
+            # Do something
+            print('Doing something imporant in the background')
 
-# Add threads to thread list
-threads.append(thread1)
-threads.append(thread2)
+            time.sleep(self.interval)
 
-# Wait for all threads to complete
-for t in threads:
-    t.join()
-print( "Exiting Main Thread")
+example = ThreadingExample()
+time.sleep(3)
+print('Checkpoint')
+time.sleep(2)
+print('Bye')
