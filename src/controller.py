@@ -24,8 +24,13 @@ class Controller (threading.Thread):
         path2 = 'C:\\Users\\' + getpass.getuser() + r'\AppData\Roaming\Microsoft\Windows\Start Menu\Programs'
 
         repository.create_table()
+        print("Created database")
+
         self.insert_programs_from_path(path)
         self.insert_programs_from_path(path2)
+
+    def clear_database(self):       
+        repository.clear_table()
 
 
     def insert_programs_from_path(self, path):

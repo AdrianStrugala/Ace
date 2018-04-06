@@ -1,4 +1,5 @@
 import threading
+import communication
 import time
 
 
@@ -8,7 +9,7 @@ class ThreadingExample(object):
     until the application exits.
     """
 
-    def __init__(self, interval=1):
+    def __init__(self, interval=0.5):
         """ Constructor
         :type interval: int
         :param interval: Check interval, in seconds
@@ -23,12 +24,14 @@ class ThreadingExample(object):
         """ Method that runs forever """
         while True:
             # Do something
-            print('Doing something imporant in the background')
+            if (len(communication.list_to_say) != 0):
+                print(communication.list_to_say[0])
+                del communication.list_to_say[0]
 
             time.sleep(self.interval)
 
-example = ThreadingExample()
-time.sleep(3)
-print('Checkpoint')
-time.sleep(2)
-print('Bye')
+
+# time.sleep(3)
+# print('Checkpoint')
+# time.sleep(2)
+# print('Bye')

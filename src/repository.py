@@ -8,30 +8,34 @@ def create_table():
         sql_create_table = """ CREATE TABLE IF NOT EXISTS src (
                                             id integer PRIMARY KEY,
                                             name text NOT NULL,
-                                            path text
+                                            path text,
+                                            UNIQUE(name, path)
                                         ); """
 
-        try:
-            c = conn.cursor()
-            c.execute(sql_create_table)
-            print("Created table " + db)
-        except Exception as e:
-            print(e)
+        c = conn.cursor()
+        c.execute(sql_create_table)
+            
+    conn.close()
 
+
+def clear_table():
+    with sql.connect(db) as conn:
+        sql_create_table = """ DELETE FROM src """
+
+        c = conn.cursor()
+        c.execute(sql_create_table)
+            
     conn.close()
 
 
 def insert_program(name, path):
     with sql.connect(db) as conn:
-        sql_insert_row = """INSERT INTO src (name, path) VALUES (?, ?)"""
-
-        try:
-            c = conn.cursor()
-            c.execute(sql_insert_row, (name, path))
-            print("Inserted " + name)
-            print(c.lastrowid)
-        except Exception as e:
-            print(e)
+        sql_insert_row = """INSERT OR IGNORE INTO src (name, path) VALUES (?, ?)"""
+       
+        c = conn.cursor()
+        c.execute(sql_insert_row, (name, path))
+        if(c.lastrowid != 0):
+            print("Inserted " + name " at " + c.lastrowid)
 
     conn.close()
 
@@ -44,9 +48,6 @@ def get_program_path(name):
 
         c = conn.cursor()
         c.execute(select_program, [name])
-        print("Opening " + name)
-        print(c.lastrowid)
 
         record = c.fetchall()
-
         return record[0]

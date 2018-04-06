@@ -7,7 +7,7 @@ import os
 import win32com
 
 def sendMessage(text):
-    controller.write(text)
+    print(text)
     #communication.to_say = text
     speech.say(text)
 
@@ -18,7 +18,8 @@ def print_user_options():
     print("3 - Close Program")
     print("4 - Open Website")
     print("5 - Search in Google")
-    
+    print("6 - Clear Database")
+    print("")
     print("0 - Exit")
 
 class switch(object):
@@ -60,8 +61,9 @@ if __name__ == '__main__':
                 sendMessage("Creating Database...")
                 try:
                     controller.create_database()
-                except:
+                except Exception as e:
                     sendMessage("Cannot create database")
+                    print(e)
                 break
 
             if case(2):
@@ -69,8 +71,9 @@ if __name__ == '__main__':
                 sendMessage("Opening Program..." + program_to_open)
                 try:
                     controller.open_program(program_to_open)
-                except:
+                except Exception as e:
                     sendMessage("Cannot open " + program_to_open)
+                    print(e)
                 break
 
             if case(3):
@@ -78,8 +81,9 @@ if __name__ == '__main__':
                 sendMessage("Closing Program..." + program_to_close)
                 try:
                     controller.close_program(program_to_close)
-                except:
+                except Exception as e:
                     sendMessage("Cannot close" + program_to_close)
+                    print(e)
                 break
 
             if case(4):
@@ -87,8 +91,9 @@ if __name__ == '__main__':
                 sendMessage("Opening website..." + url_to_open)
                 try:
                     controller.open_website(url_to_open)
-                except:
+                except Exception as e:
                     sendMessage("Cannot navigate to" + url_to_open)
+                    print(e)
                 break
 
             if case(5):
@@ -96,8 +101,18 @@ if __name__ == '__main__':
                 sendMessage("Searching in Google for ..." + phrase_to_search)
                 try:
                     controller.search_in_google(phrase_to_search)
-                except:
+                except Exception as e:
                     sendMessage("Cannot find " + phrase_to_search + " in google")
+                    print(e)
+                break
+
+            if case(6):
+                sendMessage("Clearing database...")
+                try:
+                    controller.clear_database()
+                except Exception as e:
+                    sendMessage("Cannot clear database")
+                    print(e)
                 break
 
             if case(0):
