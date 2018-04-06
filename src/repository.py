@@ -33,9 +33,9 @@ def insert_program(name, path):
         sql_insert_row = """INSERT OR IGNORE INTO src (name, path) VALUES (?, ?)"""
        
         c = conn.cursor()
-        c.execute(sql_insert_row, (name, path))
+        c.execute(sql_insert_row, (str(name), str(path)))
         if(c.lastrowid != 0):
-            print("Inserted " + name " at " + c.lastrowid)
+            print('Inserted ' + name + " at " + str(c.lastrowid))
 
     conn.close()
 

@@ -11,6 +11,9 @@ import glob
 import webbrowser
 import psutil
 import threading
+import tkinter as tk
+from tkinter import filedialog
+
 
 class Controller (threading.Thread):
     def __init__(self):
@@ -24,10 +27,19 @@ class Controller (threading.Thread):
         path2 = 'C:\\Users\\' + getpass.getuser() + r'\AppData\Roaming\Microsoft\Windows\Start Menu\Programs'
 
         repository.create_table()
-        print("Created database")
 
         self.insert_programs_from_path(path)
         self.insert_programs_from_path(path2)
+
+    def add_program_manually(self):       
+        root = tk.Tk()
+        root.withdraw()
+
+        file_path =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("exe files","*.exe"),("all files","*.*")))
+        print ("Selected program location: " + file_path)
+        name = input('Type name or alias of the program: ')
+
+        repository.insert_program(name, file_path)
 
     def clear_database(self):       
         repository.clear_table()

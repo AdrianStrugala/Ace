@@ -19,6 +19,7 @@ def print_user_options():
     print("4 - Open Website")
     print("5 - Search in Google")
     print("6 - Clear Database")
+    print("7 - Manually add program to the Database")
     print("")
     print("0 - Exit")
 
@@ -112,6 +113,15 @@ if __name__ == '__main__':
                     controller.clear_database()
                 except Exception as e:
                     sendMessage("Cannot clear database")
+                    print(e)
+                break
+
+            if case(7):
+                sendMessage("Adding program...")
+                try:
+                    controller.add_program_manually()
+                except Exception as e:
+                    sendMessage("Cannot add program")
                     print(e)
                 break
 
