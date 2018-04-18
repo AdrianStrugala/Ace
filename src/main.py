@@ -2,13 +2,9 @@ import repository
 import speech
 import controller
 import communication
-import glob
-import os
-import win32com
 
 def sendMessage(text):
     print(text)
-    #communication.to_say = text
     speech.say(text)
 
 

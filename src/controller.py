@@ -19,8 +19,10 @@ class Controller (threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
 
+
     def write(self, text):
         print (text)
+
 
     def create_database(self):       
         path = r'C:\ProgramData\Microsoft\Windows\Start Menu\Programs'
@@ -31,6 +33,7 @@ class Controller (threading.Thread):
         self.insert_programs_from_path(path)
         self.insert_programs_from_path(path2)
 
+
     def add_program_manually(self):       
         root = tk.Tk()
         root.withdraw()
@@ -40,6 +43,7 @@ class Controller (threading.Thread):
         name = input('Type name or alias of the program: ')
 
         repository.insert_program(name, file_path)
+
 
     def clear_database(self):       
         repository.clear_table()
@@ -59,6 +63,7 @@ class Controller (threading.Thread):
     def open_program(self, program_to_open):
         program_path = repository.get_program_path(program_to_open)
         subprocess.Popen([program_path])
+
 
     def close_program(self, program_to_close):
         for process in (process for process in psutil.process_iter() if program_to_close in process.name()):
