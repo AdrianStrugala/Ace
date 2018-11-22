@@ -1,11 +1,12 @@
 #Install required modules
 import os
-os.system('python -m pip install -r requirements.txt')
+os.system('python -m pip install --upgrade -r requirements.txt')
 
 import repository
 import speech
 import controller
 import communication
+from chat import create_database
 
 
 def sendMessage(text):
@@ -37,6 +38,8 @@ def case(*args):
 
 
 if __name__ == '__main__':
+
+    create_database.execute()
 
     global muteFlag
     muteFlag = False
