@@ -1,4 +1,11 @@
-import pyttsx3
+import os
+
+try:
+  import pyttsx3
+except ImportError:
+  print ("Trying to Install required module: pyttsx3\n")
+  os.system('python -m pip install pyttsx3')
+
 import threading
 import communication
 import time

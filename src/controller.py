@@ -5,11 +5,19 @@ import winreg
 import os
 import subprocess
 import sys
-import win32com.client
+try:
+  import win32com.client
+except ImportError:
+  print ("Trying to Install required module: pywin32\n")
+  os.system('python -m pip install pywin32')
 import getpass
 import glob
 import webbrowser
-import psutil
+try:
+  import psutil
+except ImportError:
+  print ("Trying to Install required module: psutil\n")
+  os.system('python -m pip install psutil')
 import threading
 import tkinter as tk
 from tkinter import filedialog
