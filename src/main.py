@@ -1,7 +1,12 @@
+#Install required modules
+import os
+os.system('python -m pip install -r requirements.txt')
+
 import repository
 import speech
 import controller
 import communication
+
 
 def sendMessage(text):
     print(text)
