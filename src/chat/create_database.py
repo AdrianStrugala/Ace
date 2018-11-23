@@ -1,12 +1,14 @@
 import sqlite3
 import json
 from datetime import datetime
+from sqlite3.dbapi2 import Cursor, Connection
 
 source_file_name = 'RC_2010-05'
 sql_transaction = []
 
-connection = sqlite3.connect('{}.db'.format(source_file_name))
-cursor = connection.cursor()
+connection: Connection = sqlite3.connect('{}.db'.format(source_file_name))
+cursor: Cursor = connection.cursor()
+
 
 def execute():
     create_table()
@@ -31,29 +33,42 @@ def execute():
                     existing_comment_score = find_existing_score(parent_id)
                     if existing_comment_score:
                         if score >= existing_comment_score:
-                            sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score)
-                    
+                            sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc,
+                                                       score)
+
                     else:
                         if parent_data:
-                            sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, created_utc, score)
+                            sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, created_utc,
+                                                  score)
                         else:
                             sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score)
 
+
 def sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
+    sql = """
+    INSERT parent_reply 
+    SET comment_id = ?, parent_id = ? parent = ?, comment = ?, subreddit = ?, unix = ?, score = ?;
+    """.format(comment_id, parent_id, parent_data, body, subreddit, created_utc,
+                                           score).format()
+    cursor.execute(sql)
     return False
 
-def  sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score):
+
+def sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score):
     return False
 
 
 def sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
-	try:
-        #TODO tutorial 5
-		sql = """UPDATE parent_reply SET comment_id = ?, parent = ?, comment = ?, subreddit = ?, unix = ?, score = ? 
-		WHERE parent_id = ?;""".format(comment_id, parent_id, parent_data, body, subreddit, created_utc, score).format()
+    try:
+        # TODO tutorial 5
+        sql = """
+        UPDATE parent_reply SET comment_id = ?, parent = ?, comment = ?, subreddit = ?, unix = ?, score = ? 
+		WHERE parent_id = ?;
+		""".format(comment_id, parent_id, parent_data, body, subreddit, created_utc, score).format()
+        cursor.execute(sql)
 
-	except Exception as e:
-		print('replace_comment', e)
+    except Exception as e:
+        print('replace_comment', e)
 
 
 def acceptable(data):
@@ -79,13 +94,13 @@ def find_existing_score(parent_id):
             return False
 
     except Exception as e:
-        print ("find_parent", e)
+        print("find_parent", e)
         return False
 
 
 def format_data(data):
-    data = data.replace("\n", " newlinechar ")   
-    data = data.replace("\r", " newlinechar ")   
+    data = data.replace("\n", " newlinechar ")
+    data = data.replace("\r", " newlinechar ")
     data = data.replace('"', "'")
 
     return data
@@ -93,7 +108,10 @@ def format_data(data):
 
 def find_parent(parent_id):
     try:
-        sql = "SELECT comment FROM parent_reply WHERE comment_id = '{}' LIMIT 1".format(parent_id)
+        sql = """
+        SELECT comment FROM parent_reply WHERE comment_id = '{}' 
+        LIMIT 1
+        """.format(parent_id)
         cursor.execute(sql)
         result = cursor.fetchone()
 
@@ -103,18 +121,19 @@ def find_parent(parent_id):
             return False
 
     except Exception as e:
-        print ("find_parent", e)
+        print("find_parent", e)
         return False
 
 
 def create_table():
     cursor.execute(
-        """CREATE TABLE IF NOT EXISTS parent_reply
+        """
+        CREATE TABLE IF NOT EXISTS parent_reply
         (parent_id TEXT PRIMARY KEY
         , comment_id TEXT UNIQUE
         , parent TEXT
         , comment TEXT
         , subreddit TEXT
         , unix INT
-        , score INT)""")
-
+        , score INT)
+        """)
