@@ -18,8 +18,9 @@ def execute():
             row_counter += 1
             row = json.loads(row)
             parent_id = row['parent_id']
+            comment_id = row['id']
             body = format_data(row['body'])
-            crated_utc = row['created_utc']
+            created_utc = row['created_utc']
             score = row['score']
             subreddit = row['subreddit']
 
@@ -38,6 +39,12 @@ def execute():
                         else:
                             sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score)
 
+def sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
+    return False
+
+def  sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score):
+    return False
+
 
 def sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
 	try:
@@ -50,7 +57,7 @@ def sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subredd
 
 
 def acceptable(data):
-    if len(data.split(' ') > 50 or len(data) < 1):
+    if len(data.split(' ')) > 50 or len(data) < 1:
         return False
     elif len(data) > 1000:
         return False
