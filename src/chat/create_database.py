@@ -40,21 +40,21 @@ def execute():
 
 
 def sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
-    try:
-
+	try:
         #TODO tutorial 5
-        sql = 
-        """UPDATE parent_reply SET comment_id = ?, parent = ?, comment = ?, subreddit = ?, unix = ?, score = ? WHERE parent_id = ?; """.format(comment_id, parent_id, parent_data, body, subreddit, created_utc, score)
-        WHERE """
-    except Exception as e:
-        print('replace_comment', e)
+		sql = """UPDATE parent_reply SET comment_id = ?, parent = ?, comment = ?, subreddit = ?, unix = ?, score = ? 
+		WHERE parent_id = ?;""".format(comment_id, parent_id, parent_data, body, subreddit, created_utc, score).format()
+
+	except Exception as e:
+		print('replace_comment', e)
+
 
 def acceptable(data):
     if len(data.split(' ') > 50 or len(data) < 1):
         return False
     elif len(data) > 1000:
         return False
-    elif data = '[deleted]' or data = '[removed]':
+    elif data == '[deleted]' or data == '[removed]':
         return False
     else:
         return True
