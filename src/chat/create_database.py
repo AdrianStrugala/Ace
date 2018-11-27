@@ -20,7 +20,7 @@ def execute():
             row_counter += 1
             row = json.loads(row)
             parent_id = row['parent_id']
-            comment_id = row['id']
+            comment_id = row['name']
             body = format_data(row['body'])
             created_utc = row['created_utc']
             score = row['score']
@@ -40,32 +40,60 @@ def execute():
                         if parent_data:
                             sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, created_utc,
                                                   score)
+                            paired_rows +=1
                         else:
                             sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score)
 
+                if row_counter % 100000 == 0:
+                    print('Rows read: {}, Paired rows: {}, Time: {}'.format(row_counter, paired_rows, str(datetime.now())))
+
+def transaction_builder(sql):
+    global sql_transaction
+    sql_transaction.append(sql)
+
+    if len(sql_transaction) > 1:
+        cursor.execute('BEGIN TRANSACTION')
+        for s in sql_transaction:
+            try:
+                cursor.execute(s)
+            except Exception as e:
+                print ('Error during executing transaction', str(e))
+        connection.commit()
+
+        sql_transaction = []
+
 
 def sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
-    sql = """
-    INSERT parent_reply 
-    SET comment_id = ?, parent_id = ? parent = ?, comment = ?, subreddit = ?, unix = ?, score = ?;
-    """.format(comment_id, parent_id, parent_data, body, subreddit, created_utc,
-                                           score).format()
-    cursor.execute(sql)
-    return False
+    try:
+        sql = """
+        INSERT INTO parent_reply  
+        (comment_id, parent_id, parent, comment, subreddit, unix, score)
+        VALUES (?, ?, ?, ?, ?, ?, ?);
+        """
+        cursor.execute(sql, (comment_id, parent_id, parent_data, body, subreddit, created_utc, score))
+    except Exception as e:
+        print ('sql insert has parent', e)
 
 
 def sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score):
-    return False
+    try:
+        sql = """
+        INSERT INTO parent_reply  
+        (comment_id, parent_id, comment, subreddit, unix, score)
+        VALUES (?, ?, ?, ?, ?, ?);
+        """
+        cursor.execute(sql, (comment_id, parent_id, body, subreddit, created_utc, score))
+    except Exception as e:
+        print ('sql insert no parent', str(e))
 
 
 def sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
     try:
-        # TODO tutorial 5
         sql = """
         UPDATE parent_reply SET comment_id = ?, parent = ?, comment = ?, subreddit = ?, unix = ?, score = ? 
 		WHERE parent_id = ?;
-		""".format(comment_id, parent_id, parent_data, body, subreddit, created_utc, score).format()
-        cursor.execute(sql)
+		"""
+        cursor.execute(sql, (comment_id, parent_data, body, subreddit, created_utc, score, parent_id))
 
     except Exception as e:
         print('replace_comment', e)
