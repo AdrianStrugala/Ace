@@ -7,6 +7,7 @@ import speech
 import controller
 import communication
 from chat import create_database
+from chat import create_training_data
 
 
 def sendMessage(text):
@@ -40,6 +41,7 @@ def case(*args):
 if __name__ == '__main__':
 
     create_database.execute()
+    create_training_data.execute()
 
     global muteFlag
     muteFlag = False
