@@ -47,7 +47,7 @@ def transaction_builder(sql_command):
     global sql_transaction
     sql_transaction.append(sql_command)
 
-    if len(sql_transaction) > 500:
+    if len(sql_transaction) > 100:
         with sql.connect(db) as conn:
             cursor = conn.cursor()
             cursor.execute('BEGIN TRANSACTION')
@@ -55,7 +55,7 @@ def transaction_builder(sql_command):
                 try:
                     cursor.execute(s)
                 except Exception as e:
-                    print ('Error during executing transaction', str(e))
+                    print ('Error during executing transaction ' + str(e) + '. String: ' + s )
             conn.commit()
         conn.close()
 
@@ -77,9 +77,13 @@ def sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, c
 def sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score):
     try:
         sql_command = f"""
-        INSERT INTO parent_reply  
-        (comment_id, parent_id, comment, subreddit, unix, score)            
-        VALUES ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, {score});
+        MERGE parent_reply as [Target]
+        USING  ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, {score}) as [Source]
+        (comment_id, parent_id, comment, subreddit, unix, score)
+            on [Target].parent_id = [Source].parent_id
+        WHEN NOT MATCHED THEN
+            INSERT (comment_id, parent_id, comment, subreddit, unix, score)            
+            VALUES ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, {score});
         """
         transaction_builder(sql_command)
 
