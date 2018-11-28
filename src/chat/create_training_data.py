@@ -6,7 +6,7 @@ def execute():
     source_database = 'RC_2010-05.db'
 
     connection = sqlite3.connect(source_database)
-    limit = 5000
+    limit = 500
     last_unix = 0
     current_length = limit
     counter = 0
