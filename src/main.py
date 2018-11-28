@@ -40,8 +40,8 @@ def case(*args):
 
 if __name__ == '__main__':
 
-    create_database.execute()
-    #create_training_data.execute()
+    #create_database.execute()
+    create_training_data.execute()
 
     global muteFlag
     muteFlag = False

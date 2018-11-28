@@ -26,19 +26,8 @@ def execute():
 
             if acceptable(body):
                 if score >= 5:
-                    existing_comment_score = find_existing_score(parent_id)
-                    if existing_comment_score:
-                        if score >= existing_comment_score:
-                            sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc,
-                                                       score)
-
-                    else:
-                        if parent_data:
-                            sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, created_utc,
-                                                  score)
-                            paired_rows +=1
-                        else:
-                            sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score)
+                    merge_insert_update_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc,
+                                                score)
 
                 if row_counter % 100000 == 0:
                     print('Rows read: {}, Paired rows: {}, Time: {}'.format(row_counter, paired_rows, str(datetime.now())))
@@ -61,12 +50,22 @@ def transaction_builder(sql_command):
 
         sql_transaction = []
 
-def sql_insert_has_parent(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
+def merge_insert_update_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
     try:
-        sql_command = f"""
-        INSERT INTO parent_reply  
-        (comment_id, parent_id, parent, comment, subreddit, unix, score)
-        VALUES ('{comment_id}', '{parent_id}', '{parent_data}', '{body}', '{subreddit}', {created_utc}, {score});
+        sql_command = f"""        
+        MERGE parent_reply as [Target]
+        USING  ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, {score}) as [Source]
+        (comment_id, parent_id, comment, subreddit, unix, score)
+            on [Target].parent_id = [Source].parent_id
+        WHEN MATCHED THEN
+            IF [Source].score > [Target].score
+                UPDATE [Target]     
+                SET comment_id = '{comment_id}', parent = '{parent_data}', comment = '{body}', subreddit = '{subreddit}', unix = {created_utc}, score = {score}; 
+            ELSE
+        ;
+        WHEN NOT MATCHED THEN
+            INSERT (comment_id, parent_id, comment, subreddit, unix, score)            
+            VALUES ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, 0);
         """
         transaction_builder(sql_command)
 
