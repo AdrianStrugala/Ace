@@ -68,13 +68,6 @@ class Controller (threading.Thread):
     def close_program(self, program_to_close):
         for process in (process for process in psutil.process_iter() if program_to_close in process.name()):
             process.kill()
-
-
-    def open_website(self, url_to_open):
-        if(url_to_open[0] != 'w' or url_to_open[1] != 'w' or url_to_open[2] != 'w' or url_to_open[3] != '.'):
-            url_to_open = "www." + url_to_open
-
-        webbrowser.get('windows-default').open(url_to_open, new=0)
         
         
     def search_in_google(self, phrase_to_search):

@@ -8,6 +8,7 @@ import controller
 import communication
 from chat import create_database
 from chat import create_training_data
+from web_controller import open_website
 
 
 def sendMessage(text):
@@ -97,7 +98,7 @@ if __name__ == '__main__':
                 url_to_open = input('Write the url: ')
                 sendMessage("Opening website..." + url_to_open)
                 try:
-                    controller.open_website(url_to_open)
+                    open_website.Execute(url_to_open)
                 except Exception as e:
                     sendMessage("Cannot navigate to" + url_to_open)
                     print(e)

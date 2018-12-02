@@ -3,3 +3,4 @@ psutil
 pyttsx3
 wheel
 pandas
+pypiwin32
