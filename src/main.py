@@ -9,6 +9,7 @@ from chat import create_training_data
 from web_controller import open_website
 from web_controller import google_phrase
 from chat import speech
+from programs import create_database as create_programs_database
 
 
 def sendMessage(text):
