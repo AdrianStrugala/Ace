@@ -68,10 +68,5 @@ class Controller (threading.Thread):
     def close_program(self, program_to_close):
         for process in (process for process in psutil.process_iter() if program_to_close in process.name()):
             process.kill()
-        
-        
-    def search_in_google(self, phrase_to_search):
-        googleUrl = "http://google.com/?#q="
-
-        webbrowser.get('windows-default').open(googleUrl+phrase_to_search, new=0)
+           
                 

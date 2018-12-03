@@ -9,6 +9,7 @@ import communication
 from chat import create_database
 from chat import create_training_data
 from web_controller import open_website
+from web_controller import google_phrase
 
 
 def sendMessage(text):
@@ -108,9 +109,9 @@ if __name__ == '__main__':
                 phrase_to_search = input('What are you looking for: ')
                 sendMessage("Searching in Google for ..." + phrase_to_search)
                 try:
-                    controller.search_in_google(phrase_to_search)
+                    google_phrase.Execute(phrase_to_search)
                 except Exception as e:
-                    sendMessage("Cannot find " + phrase_to_search + " in google")
+                    sendMessage("Cannot find " + phrase_to_search + " in Google")
                     print(e)
                 break
 
