@@ -41,7 +41,7 @@ class Controller (threading.Thread):
         print ("Selected program location: " + file_path)
         name = input('Type name or alias of the program: ')
 
-        repository.insert_program(name, file_path)
+        repository.insert_program(name, file_path, 1)
 
 
     def clear_database(self):       
@@ -56,7 +56,7 @@ class Controller (threading.Thread):
 
             name = (file[file.rindex('\\') + 1:]).split(".", 1)[0]
 
-            repository.insert_program(name, shortcut.Targetpath)
+            repository.insert_program(name, shortcut.Targetpath, 0)
 
 
     def open_program(self, program_to_open):
