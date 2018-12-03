@@ -10,8 +10,7 @@ def create_table():
         id integer PRIMARY KEY,
         name text NOT NULL,
         path text,
-        user_defined bit,
-        UNIQUE(name, path));    
+        user_defined bit);    
         """
 
 		sql_create_index = """CREATE UNIQUE INDEX IF NOT EXISTS idx_programs_name ON programs (name);"""
@@ -42,7 +41,7 @@ def insert_program(name, path, user_defined):
 		c = conn.cursor()
 		c.execute(sql_command)
 		if(c.lastrowid != 0):
-			print('Added ' + name + ". Number of programs: " + str(c.lastrowid))
+			print(name + " is in Programs Database!")
 	conn.close()
 
 
