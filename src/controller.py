@@ -1,5 +1,4 @@
 import repository
-import speech
 import subprocess
 import winreg
 import os

@@ -3,18 +3,17 @@ import os
 os.system('python -m pip install --upgrade -r requirements.txt')
 
 import repository
-import speech
 import controller
-import communication
 from chat import create_database
 from chat import create_training_data
 from web_controller import open_website
 from web_controller import google_phrase
+from chat import speech
 
 
 def sendMessage(text):
     print(text)
-    speech.say(text)
+    speech.Say(text)
 
 
 def print_user_options():
@@ -45,10 +44,6 @@ if __name__ == '__main__':
     #create_database.execute()
     #create_training_data.execute()
 
-    global muteFlag
-    muteFlag = False
-
-    speech = speech.Speech()
     controller = controller.Controller()
 
     sendMessage("Hello. My name is Ace!")
