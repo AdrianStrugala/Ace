@@ -18,7 +18,6 @@ def sendMessage(text):
 
 
 def print_user_options():
-    print("1 - Create Database")
     print("2 - Open Program")
     print("3 - Close Program")
     print("4 - Open Website")
@@ -46,6 +45,12 @@ if __name__ == '__main__':
     #create_training_data.execute()
 
     controller = controller.Controller()
+    try:
+        create_programs_database.Execute()
+    except Exception as e:
+        sendMessage("Cannot create database")
+        print(e)
+
 
     sendMessage("Hello. My name is Ace!")
 
@@ -62,14 +67,6 @@ if __name__ == '__main__':
             sendMessage("Not a number")
 
         while switch(user_choice):
-            if case(1):
-                sendMessage("Creating Database...")
-                try:
-                    controller.create_database()
-                except Exception as e:
-                    sendMessage("Cannot create database")
-                    print(e)
-                break
 
             if case(2):
                 program_to_open = input('Type name of the program: ')
