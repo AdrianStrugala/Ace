@@ -31,12 +31,24 @@ def clear_table():
 
 def insert_program(name, path):
     with sql.connect(db) as conn:
-        sql_insert_row = """INSERT OR IGNORE INTO programs (name, path, user_defined) VALUES (?, ?, ?)"""
-       
+	
+		sql_command = f"""
+		MERGE programs as [Target] 
+		USING  ('{name}', '{path}', {user_defined}) as [Source]
+		(name, path, user_defined)
+			on [Target].name = [Source].name
+		WHEN MATCHED THEN
+			UPDATE [Target]
+			SET name = '{name}', path = '{path}', user_defined = {user_defined};
+		WHEN NOT MATCHED THEN
+			(name, path, user_defined)
+			VALUES ('{name}', '{path}', {user_defined}, 0);
+		"""
+		       
         c = conn.cursor()
-        c.execute(sql_insert_row, (str(name), str(path), 0))
+        c.execute(sql_command)
         if(c.lastrowid != 0):
-            print('Inserted ' + name + " at " + str(c.lastrowid))
+            print('Added ' + name + ". Number of programs: " + str(c.lastrowid))
 
     conn.close()
 
