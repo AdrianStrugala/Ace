@@ -10,6 +10,7 @@ from web_controller import open_website
 from web_controller import google_phrase
 from chat import speech
 from programs import create_database as create_programs_database
+from programs import clear_database as clear_programs_database
 
 
 def sendMessage(text):
@@ -111,7 +112,7 @@ if __name__ == '__main__':
             if case(6):
                 sendMessage("Clearing database...")
                 try:
-                    controller.clear_database()
+                    clear_programs_database.Execute()
                 except Exception as e:
                     sendMessage("Cannot clear database")
                     print(e)

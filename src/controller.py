@@ -27,9 +27,6 @@ class Controller (threading.Thread):
         repository.insert_program(name, file_path, 1)
 
 
-    def clear_database(self):       
-        repository.clear_table()
-
 
     def open_program(self, program_to_open):
         program_path = repository.get_program_path(program_to_open)
