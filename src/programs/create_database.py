@@ -2,8 +2,8 @@ import getpass
 import glob
 import os
 import win32com
-from programs import create_table
-from programs import insert_replace_program
+from . import create_table
+from . import insert_replace_program
 
 
 
