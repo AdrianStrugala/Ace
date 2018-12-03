@@ -2,7 +2,6 @@
 import os
 os.system('python -m pip install --upgrade -r requirements.txt')
 
-import repository
 import controller
 from chat import create_database
 from chat import create_training_data
@@ -11,6 +10,7 @@ from web_controller import google_phrase
 from chat import speech
 from programs import create_database as create_programs_database
 from programs import clear_database as clear_programs_database
+from programs import open_program
 
 
 def sendMessage(text):
@@ -73,7 +73,7 @@ if __name__ == '__main__':
                 program_to_open = input('Type name of the program: ')
                 sendMessage("Opening Program..." + program_to_open)
                 try:
-                    controller.open_program(program_to_open)
+                    open_program.Execute(program_to_open)
                 except Exception as e:
                     sendMessage("Cannot open " + program_to_open)
                     print(e)

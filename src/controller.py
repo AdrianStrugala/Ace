@@ -1,5 +1,3 @@
-import repository
-import subprocess
 import psutil
 import threading
 import tkinter as tk
@@ -28,9 +26,7 @@ class Controller (threading.Thread):
 
 
 
-    def open_program(self, program_to_open):
-        program_path = repository.get_program_path(program_to_open)
-        subprocess.Popen([program_path])
+
 
 
     def close_program(self, program_to_close):
