@@ -5,17 +5,20 @@ db = 'programs.db'
 
 def create_table():
 	with sql.connect(db) as conn:
-		sql_create_table = """ 
+		sql_create_table = """
 		CREATE TABLE IF NOT EXISTS programs (
         id integer PRIMARY KEY,
         name text NOT NULL,
         path text,
         user_defined bit,
-        UNIQUE(name, path));
+        UNIQUE(name, path));    
         """
+
+		sql_create_index = """CREATE UNIQUE INDEX IF NOT EXISTS idx_programs_name ON programs (name);"""
 
 		c = conn.cursor()
 		c.execute(sql_create_table)
+		c.execute(sql_create_index)
 
 	conn.close()
 
@@ -32,16 +35,8 @@ def clear_table():
 
 def insert_program(name, path, user_defined):
 	with sql.connect(db) as conn:
-		sql_command = f"""
-		MERGE programs as [Target] 
-		USING  (VALUES ('{name}', '{path}', {user_defined})) as [Source]
-		(name, path, user_defined)
-		ON [Target].name = [Source].name
-		WHEN MATCHED THEN
-			UPDATE [Target]
-			SET name = '{name}', path = '{path}', user_defined = {user_defined};
-		WHEN NOT MATCHED THEN
-			INSERT (name, path, user_defined)
+		sql_command = f"""		
+			REPLACE INTO programs (name, path, user_defined)
 			VALUES ('{name}', '{path}', {user_defined});
 		"""
 		c = conn.cursor()
