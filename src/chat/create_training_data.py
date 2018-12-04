@@ -19,7 +19,7 @@ def Execute():
     while current_length > 0:
         dataframe = pandas.read_sql(f"""
                                     SELECT * FROM parent_reply 
-                                    WHERE unix > {last_unix} and parent NOT NULL
+                                    WHERE unix > {last_unix} and parent != ''
                                     ORDER BY unix ASC
                                     LIMIT {test_data_size}
                                     """, connection)
