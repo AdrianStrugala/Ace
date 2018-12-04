@@ -14,7 +14,6 @@ sql_transaction = []
 def Execute():
     create_table()
     row_counter = 0
-    paired_rows = 0
 
     with open(f'./chat/temp/{source_file}', buffering=1000) as file:
         for row in file:
@@ -28,14 +27,14 @@ def Execute():
             subreddit = row['subreddit']
 
             parent_data = find_parent(parent_id)
+            parent_data = format_data(parent_data)
 
             if acceptable(body):
                 if score >= 5:
-                    merge_insert_update_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc,
-                                                score)
+                    insert_update_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score)
 
                 if row_counter % 100000 == 0:
-                    print('Rows read: {}, Paired rows: {}, Time: {}'.format(row_counter, paired_rows, str(datetime.now())))
+                    print('Rows read: {}, Paired rows: {}, Time: {}'.format(row_counter, str(datetime.now())))
 
 def transaction_builder(sql_command):
     global sql_transaction
@@ -55,59 +54,24 @@ def transaction_builder(sql_command):
 
         sql_transaction = []
 
-def merge_insert_update_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
+def insert_update_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
     try:
-        sql_command = f"""      
-        REPLACE INTO programs (name, path, user_defined)
-        VALUES ('{name}', '{path}', {user_defined});  
-        MERGE parent_reply as [Target]
-        USING  ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, {score}) as [Source]
-        (comment_id, parent_id, comment, subreddit, unix, score)
-            on [Target].parent_id = [Source].parent_id
-        WHEN MATCHED THEN
-            IF [Source].score > [Target].score
-                UPDATE [Target]     
-                SET comment_id = '{comment_id}', parent = '{parent_data}', comment = '{body}', subreddit = '{subreddit}', unix = {created_utc}, score = {score}; 
-            ELSE
-        ;
-        WHEN NOT MATCHED THEN
-            INSERT (comment_id, parent_id, comment, subreddit, unix, score)            
-            VALUES ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, 0);
-        """
-        transaction_builder(sql_command)
+        sql_insert = f"""        
+                INSERT OR IGNORE INTO parent_reply(comment_id, parent_id, parent, comment, subreddit, unix, score)
+                VALUES ('{comment_id}', '{parent_id}', '{parent_data}', '{body}', '{subreddit}', {created_utc}, {score});        
+                """
+
+        sql_update= f"""
+                UPDATE parent_reply     
+                SET comment_id = '{comment_id}', parent = '{parent_data}', comment = '{body}', subreddit = '{subreddit}', unix = {created_utc}, score = {score}
+                WHERE parent_id = '{parent_id}' AND {score} > (SELECT score FROM parent_reply WHERE parent_id = '{parent_id}')        
+                """
+
+        transaction_builder(sql_insert)
+        transaction_builder(sql_update)
 
     except Exception as e:
-        print ('sql insert has parent', e)
-
-
-def sql_insert_no_parent(comment_id, parent_id, body, subreddit, created_utc, score):
-    try:
-        sql_command = f"""
-        MERGE parent_reply as [Target]
-        USING  ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, {score}) as [Source]
-        (comment_id, parent_id, comment, subreddit, unix, score)
-            on [Target].parent_id = [Source].parent_id
-        WHEN NOT MATCHED THEN
-            INSERT (comment_id, parent_id, comment, subreddit, unix, score)            
-            VALUES ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, {score});
-        """
-        transaction_builder(sql_command)
-
-    except Exception as e:
-        print ('sql insert no parent', str(e))
-
-
-def sql_insert_replace_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
-    try:
-        sql_command = f"""
-        UPDATE parent_reply 
-        SET comment_id = '{comment_id}', parent = '{parent_data}', comment = '{body}', subreddit = '{subreddit}', unix = {created_utc}, score = {score} 
-        WHERE parent_id = '{parent_id}';
-        """
-        transaction_builder(sql_command)
-
-    except Exception as e:
-        print('replace_comment', e)
+        print ('Error during inserting and updating chat database: ', e)
 
 
 def acceptable(data):
@@ -133,11 +97,11 @@ def find_existing_score(parent_id):
         if result != None:
             return result[0]
         else:
-            return False
+            return 0
 
     except Exception as e:
         print("find existing score", e)
-        return False
+        return 0
 
 
 def format_data(data):
@@ -164,11 +128,11 @@ def find_parent(parent_id):
         if query_result != None:
             return query_result[0]
         else:
-            return False
+            return ""
 
     except Exception as e:
         print("Find parent:", e)
-        return False
+        return ""
 
 
 def create_table():

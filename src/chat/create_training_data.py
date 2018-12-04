@@ -6,7 +6,7 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 db = config['CHAT']['DB_NAME']
-test_data_size = config['CHAT']['TEST_DATA_SIZE']
+test_data_size = int(config['CHAT']['TEST_DATA_SIZE'])
 
 def Execute():
     
