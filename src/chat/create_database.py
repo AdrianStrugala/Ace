@@ -1,17 +1,22 @@
 import sqlite3 as sql
 import json
 from datetime import datetime
+import configparser
 
-source_file = 'RC_2010-05'
-db = 'RC_2010-05.db'
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+db = config['CHAT']['DB_NAME']
+source_file = config['CHAT']['SOURCE_FILE_NAME']
+
 sql_transaction = []
 
-def execute():
+def Execute():
     create_table()
     row_counter = 0
     paired_rows = 0
 
-    with open('C:\workspace\Ace\{}'.format(source_file), buffering=1000) as file:
+    with open(f'./chat/temp/{source_file}', buffering=1000) as file:
         for row in file:
             row_counter += 1
             row = json.loads(row)

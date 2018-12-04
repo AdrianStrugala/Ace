@@ -1,43 +1,48 @@
 import pandas
 import sqlite3
+import configparser
 
+config = configparser.ConfigParser()
+config.read('config.ini')
 
-def execute():
-    source_database = 'RC_2010-05.db'
+db = config['CHAT']['DB_NAME']
+test_data_size = config['CHAT']['TEST_DATA_SIZE']
 
-    connection = sqlite3.connect(source_database)
-    limit = 1000
+def Execute():
+    
+    connection = sqlite3.connect(db)
     last_unix = 0
-    current_length = limit
+    current_length = test_data_size
     counter = 0
-    test_done = False
+    test_data_saved = False
+
     while current_length > 0:
         dataframe = pandas.read_sql(f"""
                                     SELECT * FROM parent_reply 
                                     WHERE unix > {last_unix} and parent NOT NULL
                                     ORDER BY unix ASC
-                                    LIMIT {limit}
+                                    LIMIT {test_data_size}
                                     """, connection)
         current_length = len(dataframe)
         if current_length > 0:
             last_unix = dataframe.tail(1)['unix'].values[0]
-            if not test_done:
-                with open("test.from", 'a', encoding='utf8') as file:
+            if not test_data_saved:
+                with open("./chat/temp/test.from", 'a', encoding='utf8') as file:
                     for content in dataframe['parent'].values:
                         file.write(content + '\n')
-                with open("test.to", 'a', encoding='utf8') as file:
+                with open("./chat/temp/test.to", 'a', encoding='utf8') as file:
                     for content in dataframe['comment'].values:
                         file.write(content + '\n')
 
-                test_done = True
+                test_data_saved = True
             else:
-                with open("train.from", 'a', encoding='utf8') as file:
+                with open("./chat/temp/train.from", 'a', encoding='utf8') as file:
                     for content in dataframe['parent'].values:
                         file.write(content + '\n')
-                with open("train.to", 'a', encoding='utf8') as file:
+                with open("./chat/temp/train.to", 'a', encoding='utf8') as file:
                     for content in dataframe['comment'].values:
                         file.write(content + '\n')
 
             counter +=1
         if counter % 20 == 0:
-            print(str(counter * limit) + ' rows complited so far')
+            print(str(counter * test_data_size) + ' rows complited so far')

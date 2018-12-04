@@ -43,16 +43,6 @@ def case(*args):
 
 if __name__ == '__main__':
 
-    #create_database.execute()
-    #create_training_data.execute()
-
-    try:
-        create_programs_database.Execute()
-    except Exception as e:
-        sendMessage("Cannot create database")
-        print(e)
-
-
     sendMessage("Hello. My name is Ace!")
 
     user_choice = -1
@@ -68,6 +58,14 @@ if __name__ == '__main__':
             sendMessage("Not a number")
 
         while switch(user_choice):
+            if case(1):
+                sendMessage("Creating Database...")
+                try:
+                    create_programs_database.Execute()
+                except Exception as e:
+                    sendMessage("Cannot create database")
+                    print(e)
+                break
 
             if case(2):
                 program_to_open = input('Type name of the program: ')
@@ -122,9 +120,18 @@ if __name__ == '__main__':
                 sendMessage("Adding program...")
                 try:
                     add_program_manually.Execute()
-                    add_program_manually.Execute()
                 except Exception as e:
                     sendMessage("Cannot add program")
+                    print(e)
+                break
+
+            if case(8):
+                sendMessage("Learning how to speak...")
+                try:
+                    create_database.Execute()
+                    create_training_data.Execute()
+                except Exception as e:
+                    sendMessage("I still cannot speak :(")
                     print(e)
                 break
 
