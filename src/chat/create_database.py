@@ -57,7 +57,9 @@ def transaction_builder(sql_command):
 
 def merge_insert_update_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score):
     try:
-        sql_command = f"""        
+        sql_command = f"""      
+        REPLACE INTO programs (name, path, user_defined)
+        VALUES ('{name}', '{path}', {user_defined});  
         MERGE parent_reply as [Target]
         USING  ('{comment_id}', '{parent_id}', '{body}', '{subreddit}', {created_utc}, {score}) as [Source]
         (comment_id, parent_id, comment, subreddit, unix, score)
