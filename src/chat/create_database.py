@@ -34,13 +34,13 @@ def Execute():
                     insert_update_comment(comment_id, parent_id, parent_data, body, subreddit, created_utc, score)
 
                 if row_counter % 100000 == 0:
-                    print('Rows read: {}, Paired rows: {}, Time: {}'.format(row_counter, str(datetime.now())))
+                    print(f'Rows read: {row_counter}, Time: {str(datetime.now())}')
 
 def transaction_builder(sql_command):
     global sql_transaction
     sql_transaction.append(sql_command)
 
-    if len(sql_transaction) > 100:
+    if len(sql_transaction) > 500:
         with sql.connect(db) as conn:
             cursor = conn.cursor()
             cursor.execute('BEGIN TRANSACTION')
