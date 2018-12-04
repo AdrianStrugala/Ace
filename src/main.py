@@ -20,12 +20,14 @@ def sendMessage(text):
 
 
 def print_user_options():
+    print("1 - Create Database")
     print("2 - Open Program")
     print("3 - Close Program")
     print("4 - Open Website")
     print("5 - Search in Google")
     print("6 - Clear Database")
     print("7 - Manually add program to the Database")
+    print("8 - Teach me how to speak")
     print("")
     print("0 - Exit")
 
