@@ -2,7 +2,6 @@
 import os
 os.system('python -m pip install --upgrade -r requirements.txt')
 
-import controller
 from chat import create_database
 from chat import create_training_data
 from web_controller import open_website
@@ -11,6 +10,8 @@ from chat import speech
 from programs import create_database as create_programs_database
 from programs import clear_database as clear_programs_database
 from programs import open_program
+from programs import close_program
+from programs import add_program_manually
 
 
 def sendMessage(text):
@@ -45,7 +46,6 @@ if __name__ == '__main__':
     #create_database.execute()
     #create_training_data.execute()
 
-    controller = controller.Controller()
     try:
         create_programs_database.Execute()
     except Exception as e:
@@ -71,7 +71,7 @@ if __name__ == '__main__':
 
             if case(2):
                 program_to_open = input('Type name of the program: ')
-                sendMessage("Opening Program..." + program_to_open)
+                sendMessage("Opening Program... " + program_to_open)
                 try:
                     open_program.Execute(program_to_open)
                 except Exception as e:
@@ -81,9 +81,9 @@ if __name__ == '__main__':
 
             if case(3):
                 program_to_close = input('Type name of the program: ')
-                sendMessage("Closing Program..." + program_to_close)
+                sendMessage("Closing Program... " + program_to_close)
                 try:
-                    controller.close_program(program_to_close)
+                    close_program.Execute(program_to_close)
                 except Exception as e:
                     sendMessage("Cannot close" + program_to_close)
                     print(e)
@@ -91,7 +91,7 @@ if __name__ == '__main__':
 
             if case(4):
                 url_to_open = input('Write the url: ')
-                sendMessage("Opening website..." + url_to_open)
+                sendMessage("Opening website... " + url_to_open)
                 try:
                     open_website.Execute(url_to_open)
                 except Exception as e:
@@ -101,7 +101,7 @@ if __name__ == '__main__':
 
             if case(5):
                 phrase_to_search = input('What are you looking for: ')
-                sendMessage("Searching in Google for ..." + phrase_to_search)
+                sendMessage("Searching in Google for... " + phrase_to_search)
                 try:
                     google_phrase.Execute(phrase_to_search)
                 except Exception as e:
@@ -121,7 +121,8 @@ if __name__ == '__main__':
             if case(7):
                 sendMessage("Adding program...")
                 try:
-                    controller.add_program_manually()
+                    add_program_manually.Execute()
+                    add_program_manually.Execute()
                 except Exception as e:
                     sendMessage("Cannot add program")
                     print(e)
