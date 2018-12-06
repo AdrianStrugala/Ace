@@ -12,8 +12,8 @@ from programs import clear_database as clear_programs_database
 from programs import open_program
 from programs import close_program
 from programs import add_program_manually
-from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
-from chat.AI_nmt import train
+# from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
+# from chat.AI_nmt import train
 
 
 def sendMessage(text):
