@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bce42a1-2cf4-4f6c-957a-b1338fa35dfe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Ace.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ace.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chat/inference.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chat/train.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chat/AI_nmt/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/chat/AI_nmt/train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,43 +37,62 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="176" />
+          <entry key="py" value="179" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="176" />
+          <entry key="Python" value="179" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="25" />
+          <entry key="py" value="28" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="25" />
+          <entry key="Python" value="28" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="64" lean-forward="true" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+            <state relative-caret-position="-1609">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/inference_test.py">
+        <entry file="file://$PROJECT_DIR$/src/web_controller/google_phrase.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1768" />
+            <state relative-caret-position="423">
+              <caret line="89" column="9" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/web_controller/open_website.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -86,7 +100,7 @@
         <entry file="file://$PROJECT_DIR$/src/chat/create_database.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -106,20 +120,6 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/model_helper.py">
           <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/model_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4760" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/nmt_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1292" />
-          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -165,6 +165,7 @@
         <option value="$PROJECT_DIR$/src/chat/AI_nmt/nmt/nmt.py" />
         <option value="$PROJECT_DIR$/src/chat/train.py" />
         <option value="$PROJECT_DIR$/src/main.py" />
+        <option value="$PROJECT_DIR$/src/chat/AI_nmt/train.py" />
       </list>
     </option>
   </component>
@@ -207,24 +208,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="chat" type="462c0819:PsiDirectoryNode" />
               <item name="AI_nmt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ace" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="graphical_user_interface" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ace" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="programs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ace" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Ace" type="b2602c69:ProjectViewProjectNode" />
@@ -338,7 +321,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26975763" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26975763" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -349,7 +332,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.4853738" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.33044422" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32827735" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -407,16 +390,6 @@
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pandas/core/indexes/base.py" />
     <entry file="file://$PROJECT_DIR$/src/speech.py" />
     <entry file="file://$PROJECT_DIR$/src/repository.py" />
-    <entry file="file://$PROJECT_DIR$/src/web_controller/google_phrase.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/web_controller/open_website.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller.py" />
     <entry file="file://$PROJECT_DIR$/src/programs/select_program_path.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -585,7 +558,7 @@
     <entry file="file://$PROJECT_DIR$/src/chat/create_database.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -594,8 +567,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="64" lean-forward="true" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+        <state relative-caret-position="-1609">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/web_controller/open_website.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/web_controller/google_phrase.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="89" column="9" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
