@@ -7,7 +7,7 @@ from core.tokenizer import tokenize
 
 
 # Prepare all files
-def prepare():
+def Execute():
     global vocab, written_lines
 
     # Files to be prepared

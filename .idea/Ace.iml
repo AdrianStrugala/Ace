@@ -7,6 +7,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/programs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/web_controller" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/graphical_user_interface" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/chat/AI_nmt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/chat/AI_nmt/core" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/chat/AI_nmt/nmt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/chat/AI_nmt/setup" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/chat/AI_nmt/tests" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/chat/AI_nmt/utils" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.6 (venv)" jdkType="Python SDK" />

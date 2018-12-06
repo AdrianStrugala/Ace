@@ -12,6 +12,8 @@ from programs import clear_database as clear_programs_database
 from programs import open_program
 from programs import close_program
 from programs import add_program_manually
+from chat.setup import prepare_data
+from chat import train
 
 
 def sendMessage(text):
@@ -132,6 +134,8 @@ if __name__ == '__main__':
                 try:
                     create_database.Execute()
                     create_training_data.Execute()
+                    prepare_data.Execute()
+                    train.Execute()
                 except Exception as e:
                     sendMessage("I still cannot speak :(")
                     print(e)
