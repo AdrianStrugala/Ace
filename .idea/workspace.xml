@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1bce42a1-2cf4-4f6c-957a-b1338fa35dfe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/Ace.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ace.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chat/AI_nmt/setup/prepare_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/chat/AI_nmt/setup/prepare_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chat/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/chat/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chat/inference.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chat/train.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,83 +42,54 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="162" />
+          <entry key="py" value="176" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="162" />
+          <entry key="Python" value="176" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="17" />
-          <entry key="txt" value="1" />
+          <entry key="py" value="25" />
+          <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="17" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="25" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="153">
+              <caret line="9" column="64" lean-forward="true" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chat/create_training_data.py">
+        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/inference_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="-1768" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/chat/create_database.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/programs/clear_database.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="7" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/programs/close_program.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chat/train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/nmt.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -126,34 +98,37 @@
         <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/inference.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/setup/settings.py">
+        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/model_helper.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/model_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-68">
-              <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-            </state>
+            <state relative-caret-position="-4760" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/programs/create_database.py">
+        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/nmt_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
+            <state relative-caret-position="-1292" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/setup/protected_phrases_standard.txt">
+        <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/setup/answers_detokenize.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/chat/__init__.py">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -186,10 +161,10 @@
         <option value="$PROJECT_DIR$/src/programs/insert_replace_program.py" />
         <option value="$PROJECT_DIR$/src/chat/create_database.py" />
         <option value="$PROJECT_DIR$/src/chat/create_training_data.py" />
-        <option value="$PROJECT_DIR$/src/main.py" />
-        <option value="$PROJECT_DIR$/src/chat/train.py" />
         <option value="$PROJECT_DIR$/src/chat/AI_nmt/nmt/inference.py" />
         <option value="$PROJECT_DIR$/src/chat/AI_nmt/nmt/nmt.py" />
+        <option value="$PROJECT_DIR$/src/chat/train.py" />
+        <option value="$PROJECT_DIR$/src/main.py" />
       </list>
     </option>
   </component>
@@ -237,22 +212,6 @@
               <item name="Ace" type="b2602c69:ProjectViewProjectNode" />
               <item name="Ace" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="chat" type="462c0819:PsiDirectoryNode" />
-              <item name="AI_nmt" type="462c0819:PsiDirectoryNode" />
-              <item name="nmt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ace" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="chat" type="462c0819:PsiDirectoryNode" />
-              <item name="AI_nmt" type="462c0819:PsiDirectoryNode" />
-              <item name="setup" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ace" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="graphical_user_interface" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -282,7 +241,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -447,9 +406,6 @@
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pandas/core/frame.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pandas/core/indexes/base.py" />
     <entry file="file://$PROJECT_DIR$/src/speech.py" />
-    <entry file="file://$PROJECT_DIR$/src/chat/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/repository.py" />
     <entry file="file://$PROJECT_DIR$/src/web_controller/google_phrase.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -531,19 +487,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/setup/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/chat/create_database.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/chat/create_training_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -588,31 +531,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.py">
+    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/nmt.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="289">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/chat/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+        <state relative-caret-position="244">
+          <caret line="87" column="36" selection-start-line="87" selection-start-column="36" selection-end-line="87" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/inference_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1768" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/inference.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/nmt.py">
+    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/model_helper.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/model_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="-4760" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/nmt/nmt_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1292" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/setup/answers_detokenize.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chat/AI_nmt/setup/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chat/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chat/create_database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="64" lean-forward="true" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
         </state>
       </provider>
     </entry>
