@@ -309,7 +309,14 @@ if __name__ == "__main__":
         if answers is None:
             print(colorama.Fore.RED + "! Question can't be empty" + colorama.Fore.RESET)
         else:
-            for i, _ in enumerate(answers['scores']):
-                print("{}- {}{} [{}] {}{}{}".format(colorama.Fore.GREEN if answers['scores'][i] == max(answers['scores']) and answers['scores'][i] >= score_settings['bad_response_threshold'] else colorama.Fore.YELLOW if answers['scores'][i] >= score_settings['bad_response_threshold'] else colorama.Fore.RED, answers['answers'][i], colorama.Fore.RESET, answers['scores'][i], colorama.Fore.BLUE, answers['score_modifiers'][i] if score_settings['show_score_modifiers'] else '', colorama.Fore.RESET))
+            if answers['scores'][answers['best_index']] < score_settings['bad_response_threshold']:
+                print("Sorry. I don't even know what to say :(")
+            else:
+                print(answers['answers'][answers['best_index']])
+
+            # You may print all the possible answers here
+            # print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+            # for i, _ in enumerate(answers['scores']):
+            #     print("{}- {}{} [{}] {}{}{}".format(colorama.Fore.GREEN if answers['scores'][i] == max(answers['scores']) and answers['scores'][i] >= score_settings['bad_response_threshold'] else colorama.Fore.YELLOW if answers['scores'][i] >= score_settings['bad_response_threshold'] else colorama.Fore.RED, answers['answers'][i], colorama.Fore.RESET, answers['scores'][i], colorama.Fore.BLUE, answers['score_modifiers'][i] if score_settings['show_score_modifiers'] else '', colorama.Fore.RESET))
 
 os.chdir(original_cwd)
