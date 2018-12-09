@@ -12,7 +12,7 @@ out_dir = os.path.join(package_path, "model/")
 train_dir = os.path.join(package_path, "data/")
 
 # Raw data path (data to be prepared and tokenized)
-source_dir = os.path.join(package_path, "new_data/")
+source_dir = os.path.join("../temp")
 
 
 ## Settings you can adjust
