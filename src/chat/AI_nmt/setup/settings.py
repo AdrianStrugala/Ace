@@ -14,7 +14,6 @@ train_dir = os.path.join(package_path, "data/")
 # Raw data path (data to be prepared and tokenized)
 source_dir = os.path.join(package_path, "new_data/")
 
-
 ## Settings you can adjust
 
 # Preprocessing settings
@@ -25,7 +24,7 @@ preprocessing = {
     'samples': -1,
 
     # Vocab max size
-    'vocab_size': 15000,
+    'vocab_size': 50000,
 
     # Whether to use joined (common) vocab for both source and destination
     # (should work well with BPE/WPM-like tokenization for our chatbot - english-english translation)
@@ -33,7 +32,7 @@ preprocessing = {
 
     # Whether to use BPE/WPM-like tokenization, or standard one
     'use_bpe': True,
-    
+
     # Whether to use:
     # - embedded detokenizer (increases number of vocab tokens, but is more accurate)
     # - external/rule-based detokenizer (based of a bunch of rules and regular expressions)
@@ -52,7 +51,6 @@ preprocessing = {
     # - ends training after set number of epochs
     # Set to None to disable
     'epochs': [0.001, 0.0001, 0.00001],
-
 
     ## You don't normally need to change anything below (internal settings)
 
@@ -86,20 +84,20 @@ hparams = {
     'attention': 'scaled_luong',
     'num_train_steps': 10000000,
     'num_layers': 2,
-#    'num_encoder_layers': 2,
-#    'num_decoder_layers': 2,
+    #    'num_encoder_layers': 2,
+    #    'num_decoder_layers': 2,
     'num_units': 512,
-#    'batch_size': 128,
-#    'override_loaded_hparams': True,
-#    'decay_scheme': 'luong234'
-#    'residual': True,
+    #    'batch_size': 128,
+    #    'override_loaded_hparams': True,
+    #    'decay_scheme': 'luong234'
+    #    'residual': True,
     'optimizer': 'adam',
     'encoder_type': 'bi',
     'learning_rate': 0.001,
     'beam_width': 20,
     'length_penalty_weight': 1.0,
     'num_translations_per_input': 20,
-#    'num_keep_ckpts': 5,
+    #    'num_keep_ckpts': 5,
 
     ## You don't normally need to change anything below (internal settings)
     'src': 'from',
@@ -221,14 +219,14 @@ score = {
     'show_score_modifiers': False,
 }
 
-
 ######## DO NOT TOUCH ANYTHING BELOW ########
 
 if preprocessing['use_bpe']:
     preprocessing['embedded_detokenizer'] = True
     hparams['subword_option'] = 'spm'
 
-preprocessing['protected_phrases_file'] = preprocessing['protected_phrases_bpe_file'] if preprocessing['use_bpe'] else preprocessing['protected_phrases_standard_file']
+preprocessing['protected_phrases_file'] = preprocessing['protected_phrases_bpe_file'] if preprocessing['use_bpe'] else \
+preprocessing['protected_phrases_standard_file']
 
 if preprocessing['use_bpe']:
     hparams['vocab_prefix'] += '.bpe'
