@@ -1,14 +1,36 @@
 import os
-__file__ = os.path.realpath(__file__)
 os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 import sys
 sys.path.insert(0, os.getcwd())
 from core.tokenizer import tokenize
+import errno
+from collections import Counter, defaultdict
+from setup.settings import preprocessing, hparams
+from core.tokenizer import apply_bpe_init, apply_bpe, sentence_split
+from tqdm import tqdm
+from itertools import zip_longest
+from multiprocessing import Pool
+from threading import Thread
+import regex as re
+import json
+import colorama
+import pickle
+from pathlib import Path
+
+
+# Prepare training data set
+def Execute():
+    colorama.init()
+    vocab = Counter()
+
+    prepare()
 
 
 # Prepare all files
-def Execute():
+def prepare():
     global vocab, written_lines
+
+    print("Prepiring data for training...")
 
     # Files to be prepared
     files = {
@@ -531,23 +553,4 @@ def append_vocab(lines):
     vocab.update(local_vocab)
 
 
-# Prepare training data set
-if __name__ == "__main__":
-    import errno
-    from collections import Counter, defaultdict
-    from setup.settings import preprocessing, hparams
-    from core.tokenizer import apply_bpe_init, apply_bpe, sentence_split
-    from tqdm import tqdm
-    from itertools import zip_longest
-    from multiprocessing import Pool
-    from threading import Thread
-    import regex as re
-    import json
-    import colorama
-    import pickle
-    from pathlib import Path
 
-    colorama.init()
-    vocab = Counter()
-
-    prepare()

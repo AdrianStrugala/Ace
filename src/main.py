@@ -57,7 +57,7 @@ if __name__ == '__main__':
 		sendMessage("Make your choice")
 		print_user_options()
 
-		user_choice = input('Choice: ')
+		user_choice = int(input('Choice: '))
 
 		while switch(user_choice):
 			if case(1):
