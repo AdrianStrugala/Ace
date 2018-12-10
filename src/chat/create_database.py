@@ -17,7 +17,7 @@ def Execute():
     row_counter = 0
 
     print(f"Fetching data from {source_file}:")
-    with open(f'./chat/temp/{source_file}', buffering=1000) as file:
+    with open(f'./chat/temp/{source_file}', buffering=10000) as file:
         for row in file:
 
             row_counter += 1
