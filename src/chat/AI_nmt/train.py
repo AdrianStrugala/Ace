@@ -87,4 +87,3 @@ def nmt_train():
     # And now we can run TF with modified arguments
     tf.app.run(main=nmt.main, argv=[os.getcwd() + '\AI_nmt\nmt\nmt.py'] + unparsed)
 
-Execute()
