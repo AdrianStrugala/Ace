@@ -1,7 +1,7 @@
 #Install required modules
 import os
 os.system('python -m pip install --upgrade -r requirements.txt')
-
+os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from chat import create_database
 from chat import create_training_data
 from web_controller import open_website
@@ -48,6 +48,7 @@ def case(*args):
 
 if __name__ == '__main__':
 
+	os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 	sendMessage("Hello. My name is Ace!")
 
 	user_choice = -1

@@ -545,7 +545,8 @@ def append_vocab(lines):
 
 # Prepare training data set
 def Execute():
-
+    print ("Prepairing data for training...")
+    os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
     colorama.init()
     vocab = Counter()
 
