@@ -2,7 +2,7 @@ import sqlite3 as sql
 import configparser
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('config.py')
 
 db = config['PROGRAMS']['DB_NAME']
 

@@ -3,7 +3,7 @@ import sqlite3
 import configparser
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('config.py')
 
 db = config['CHAT']['DB_NAME']
 batch_size = 1000

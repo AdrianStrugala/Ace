@@ -1,14 +1,13 @@
 import sqlite3 as sql
 import json
+import os
+os.chdir('.')
 from datetime import datetime
-import configparser
 from . import comment_model
+from ..config import CHAT
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-db = config['CHAT']['DB_NAME']
-source_file = config['CHAT']['SOURCE_FILE_NAME']
+db = CHAT['DB_NAME']
+source_file = CHAT['SOURCE_FILE_NAME']
 
 sql_transaction = []
 
@@ -17,7 +16,7 @@ def Execute():
     row_counter = 0
 
     print(f"Fetching data from {source_file}:")
-    with open(f'./chat/temp/{source_file}', buffering=10000) as file:
+    with open(f'./temp/{source_file}', buffering=10000) as file:
         for row in file:
 
             row_counter += 1
