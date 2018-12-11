@@ -148,7 +148,8 @@ if __name__ == '__main__':
 					with cd( os.getcwd() + "\AI_nmt\setup"):
 						subprocess.call("py .\prepare_data.py")
 					# outside the context manager we are back wherever we started.
-					train.Execute()
+					with cd( os.getcwd() + "\AI_nmt"):
+						subprocess.call("py .\train.py")
 
 				except Exception as e:
 					sendMessage("I still cannot speak :(")
