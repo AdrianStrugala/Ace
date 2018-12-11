@@ -15,6 +15,20 @@ from programs import add_program_manually
 from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
 from chat.AI_nmt import train
 from chat.AI_nmt.inference import inference
+import subprocess
+from .main import cd
+
+class cd:
+	"""Context manager for changing the current working directory"""
+	def __init__(self, newPath):
+		self.newPath = os.path.expanduser(newPath)
+
+	def __enter__(self):
+		self.savedPath = os.getcwd()
+		os.chdir(self.newPath)
+
+	def __exit__(self, etype, value, traceback):
+		os.chdir(self.savedPath)
 
 
 def sendMessage(text):
@@ -131,10 +145,13 @@ if __name__ == '__main__':
 			if case(8):
 				sendMessage("Learning how to speak...")
 				try:
-				 #   create_database.Execute()
-				 #  create_training_data.Execute()
-					nmt_prepare_data.Execute()
+                    #   create_database.Execute()
+                    #  create_training_data.Execute()
+					with cd("~/chat/AI_nmt/setup"):
+						subprocess.call("py .\prepare_data.py")
+					# outside the context manager we are back wherever we started.
 					train.Execute()
+
 				except Exception as e:
 					sendMessage("I still cannot speak :(")
 					print(e)
