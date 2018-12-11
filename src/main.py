@@ -1,7 +1,6 @@
 #Install required modules
 import os
 os.system('python -m pip install --upgrade -r requirements.txt')
-os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from chat import create_database
 from chat import create_training_data
 from web_controller import open_website
@@ -16,7 +15,6 @@ from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
 from chat.AI_nmt import train
 from chat.AI_nmt.inference import inference
 import subprocess
-from .main import cd
 
 class cd:
 	"""Context manager for changing the current working directory"""
@@ -147,7 +145,7 @@ if __name__ == '__main__':
 				try:
                     #   create_database.Execute()
                     #  create_training_data.Execute()
-					with cd("~/chat/AI_nmt/setup"):
+					with cd( os.getcwd() + "\AI_nmt\setup"):
 						subprocess.call("py .\prepare_data.py")
 					# outside the context manager we are back wherever we started.
 					train.Execute()

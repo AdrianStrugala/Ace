@@ -1,13 +1,14 @@
 import sqlite3 as sql
 import json
-import os
-os.chdir('.')
 from datetime import datetime
 from . import comment_model
-from ..config import CHAT
+import configparser
 
-db = CHAT['DB_NAME']
-source_file = CHAT['SOURCE_FILE_NAME']
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+db = config['CHAT']['DB_NAME']
+source_file = config['CHAT']['SOURCE_FILE_NAME']
 
 sql_transaction = []
 
