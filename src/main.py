@@ -15,19 +15,16 @@ from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
 from chat.AI_nmt import train
 from chat.AI_nmt.inference import inference
 import subprocess
+from contextlib import contextmanager
 
-class cd:
-	"""Context manager for changing the current working directory"""
-	def __init__(self, newPath):
-		self.newPath = os.path.expanduser(newPath)
-
-	def __enter__(self):
-		self.savedPath = os.getcwd()
-		os.chdir(self.newPath)
-
-	def __exit__(self, etype, value, traceback):
-		os.chdir(self.savedPath)
-
+@contextmanager
+def cd(newdir):
+    prevdir = os.getcwd()
+    os.chdir(os.path.expanduser(newdir))
+    try:
+        yield
+    finally:
+        os.chdir(prevdir)
 
 def sendMessage(text):
 	print(text)
@@ -147,6 +144,7 @@ if __name__ == '__main__':
                     #  create_training_data.Execute()
 					with cd( os.getcwd() + "\AI_nmt\setup"):
 						subprocess.call("py .\prepare_data.py")
+						print("Data is prepared for train!")
 					# outside the context manager we are back wherever we started.
 					with cd( os.getcwd() + "\AI_nmt"):
 						subprocess.call("py .\train.py")
