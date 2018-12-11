@@ -140,13 +140,17 @@ if __name__ == '__main__':
 			if case(8):
 				sendMessage("Learning how to speak...")
 				try:
+					sendMessage("Gathering vocabulary")
                     #   create_database.Execute()
                     #  create_training_data.Execute()
 					with cd( os.getcwd() + "\AI_nmt\setup"):
-						subprocess.call("py .\prepare_data.py")
-						print("Data is prepared for train!")
+						sendMessage("Preparing data for train")
+					#	subprocess.call("py .\prepare_data.py")
+
 					# outside the context manager we are back wherever we started.
 					with cd( os.getcwd() + "\AI_nmt"):
+						sendMessage("The training begins now!")
+						print( os.getcwd())
 						subprocess.call("py .\train.py")
 
 				except Exception as e:

@@ -86,7 +86,6 @@ def nmt_train():
     tf.app.run(main=nmt.main, argv=[os.getcwd() + '\AI_nmt\nmt\nmt.py'] + unparsed)
 
 
-# Prepare training data set
 if __name__ == "__main__":
     colorama.init()
     Execute()
