@@ -12,6 +12,7 @@ from threading import Thread
 from setup.custom_summary import custom_summary
 
 
+
 def Execute():
 
     print('\n\n{}Training model...{}\n'.format(colorama.Fore.GREEN, colorama.Fore.RESET))

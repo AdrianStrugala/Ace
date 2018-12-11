@@ -151,7 +151,7 @@ if __name__ == '__main__':
 					with cd( os.getcwd() + "\AI_nmt"):
 						sendMessage("The training begins now!")
 						print( os.getcwd())
-						subprocess.call("py .\train.py")
+						subprocess.call("python -c \"from train import Execute; Execute()\"")
 
 				except Exception as e:
 					sendMessage("I still cannot speak :(")
