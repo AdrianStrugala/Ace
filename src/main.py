@@ -58,12 +58,7 @@ def case(*args):
 	return any((arg == switch.value for arg in args))
 
 
-if __name__ == '__main__':
-
-	thread = threading.Thread(target=speech.Run(), args=())
-	thread.daemon = True  # Daemonize thread
-	thread.start()
-
+def display_menu():
 	os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 	sendMessage("Hello. My name is Ace!")
 
@@ -148,16 +143,16 @@ if __name__ == '__main__':
 				sendMessage("Learning how to speak...")
 				try:
 					sendMessage("Gathering vocabulary")
-                    #   create_database.Execute()
-                    #  create_training_data.Execute()
-					with cd( os.getcwd() + "\AI_nmt\setup"):
+					#   create_database.Execute()
+					#  create_training_data.Execute()
+					with cd(os.getcwd() + "\AI_nmt\setup"):
 						sendMessage("Preparing data for train")
 					#	subprocess.call("py .\prepare_data.py")
 
 					# outside the context manager we are back wherever we started.
-					with cd( os.getcwd() + "\AI_nmt"):
+					with cd(os.getcwd() + "\AI_nmt"):
 						sendMessage("The training begins now!")
-						print( os.getcwd())
+						print(os.getcwd())
 						subprocess.call("python -c \"from train import Execute; Execute()\"")
 
 				except Exception as e:
@@ -169,5 +164,15 @@ if __name__ == '__main__':
 				sendMessage("Exiting")
 				break
 
-			print(inference(user_choice))
+			#print(inference(user_choice))
 			break
+
+if __name__ == '__main__':
+
+	speech_thread = threading.Thread(target=speech.Run(), args=())
+	speech_thread.daemon = True  # Daemonize thread
+
+	main_thread = threading.Thread(target=display_menu(), args=())
+
+	main_thread.start()
+	speech_thread.start()
