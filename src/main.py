@@ -17,6 +17,8 @@ from programs import add_program_manually
 import subprocess
 import colorama
 from contextlib import contextmanager
+import threading
+import time
 
 @contextmanager
 def cd(newdir):
@@ -57,6 +59,10 @@ def case(*args):
 
 
 if __name__ == '__main__':
+
+	thread = threading.Thread(target=speech.Run(), args=())
+	thread.daemon = True  # Daemonize thread
+	thread.start()
 
 	os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 	sendMessage("Hello. My name is Ace!")
