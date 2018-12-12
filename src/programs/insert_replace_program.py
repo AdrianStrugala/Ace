@@ -16,7 +16,7 @@ def Execute(name, path, user_defined):
 			WHERE name = '{name}';		
 		"""
         c = conn.cursor()
-        c.execute(sql_command)
+        c.executescript(sql_command)
         if (c.lastrowid != 0):
             print(name + " is in Programs Database!")
     conn.close()
