@@ -15,6 +15,7 @@ from programs import add_program_manually
 #from chat.AI_nmt import train
 #from chat.AI_nmt.inference import inference
 import subprocess
+import colorama
 from contextlib import contextmanager
 
 @contextmanager
@@ -27,7 +28,7 @@ def cd(newdir):
         os.chdir(prevdir)
 
 def sendMessage(text):
-	print(text)
+	print(f'{colorama.Fore.LIGHTRED_EX}{text}{colorama.Fore.RESET}')
 	speech.Say(text)
 
 
@@ -63,7 +64,7 @@ if __name__ == '__main__':
 	user_choice = -1
 
 	while user_choice != 0:
-		print("")
+		sendMessage("")
 		sendMessage("Make your choice")
 		print_user_options()
 
