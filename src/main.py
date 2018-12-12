@@ -16,9 +16,11 @@ from programs import add_program_manually
 #from chat.AI_nmt.inference import inference
 import subprocess
 import colorama
+from multiprocessing import Pool
 from contextlib import contextmanager
 import threading
 import time
+from multiprocessing import Process
 
 @contextmanager
 def cd(newdir):
@@ -168,11 +170,19 @@ def display_menu():
 			break
 
 if __name__ == '__main__':
+	#pool = Pool(processes=2)
 
-	speech_thread = threading.Thread(target=speech.Run(), args=())
-	speech_thread.daemon = True  # Daemonize thread
+	#pool.apply_async(display_menu())
+	#pool.apply_async(speech.Run())
 
-	main_thread = threading.Thread(target=display_menu(), args=())
+	main_thread = Process(target=display_menu())
+	speech_thread = Process(target=speech.Run())
+	#speech_thread.daemon = True  # Daemonize thread
 
-	main_thread.start()
-	speech_thread.start()
+
+
+#	main_thread.start()
+#	speech_thread.start()
+
+#	main_thread.join()
+#	speech_thread.join()
