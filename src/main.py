@@ -21,7 +21,7 @@ from multiprocessing import Pool
 from contextlib import contextmanager
 import threading
 import time
-from multiprocessing import Process
+from multiprocessing import Process, Manager
 
 
 @contextmanager
@@ -66,15 +66,18 @@ def case(*args):
     return any((arg == switch.value for arg in args))
 
 
-def display_menu():
+def display_menu(list_to_say):
     os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
     sendMessage("Hello. My name is Ace!")
+    list_to_say.append("Hello. My name is Ace!")
 
     user_choice = -1
 
     while user_choice != 0:
         sendMessage("")
         sendMessage("Make your choice")
+        list_to_say.append("Make your choice")
+
         print_user_options()
 
         user_choice = int(input('Choice: '))
@@ -176,22 +179,18 @@ def display_menu():
             break
 
 
-def dupa():
-    while True:
-        print('dupa')
-        speech.Say('dupa')
-        time.sleep(1.75)
-
-
 def runInParallel(*fns):
-    proc = []
-    for fn in fns:
-        p = Process(target=fn)
-        p.start()
-        proc.append(p)
-    for p in proc:
-        p.join()
+    with Manager() as manager:
+        list_to_say = manager.list()
+
+        processes = []
+        for fn in fns:
+            p = Process(target=fn, args=(list_to_say,))
+            p.start()
+            processes.append(p)
+        for p in processes:
+            p.join()
 
 
 if __name__ == '__main__':
-    runInParallel(speech.Run, dupa)
+    runInParallel(speech.Run, display_menu)
