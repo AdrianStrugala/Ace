@@ -169,20 +169,16 @@ def display_menu():
 			#print(inference(user_choice))
 			break
 
+
+def runInParallel(*fns):
+  proc = []
+  for fn in fns:
+    p = Process(target=fn)
+    p.start()
+    proc.append(p)
+  for p in proc:
+    p.join()
+
 if __name__ == '__main__':
-	#pool = Pool(processes=2)
 
-	#pool.apply_async(display_menu())
-	#pool.apply_async(speech.Run())
-
-	main_thread = Process(target=display_menu())
-	speech_thread = Process(target=speech.Run())
-	#speech_thread.daemon = True  # Daemonize thread
-
-
-
-#	main_thread.start()
-#	speech_thread.start()
-
-#	main_thread.join()
-#	speech_thread.join()
+	runInParallel(speech.Run, display_menu)
