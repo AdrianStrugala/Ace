@@ -1,50 +1,39 @@
 import time
-from multiprocessing import Process
+from multiprocessing import Process, Manager
 
 
-def dupa():
+sth = 1
+
+def dupa(L):
     while True:
         print('dupa')
-
+        L.append(7)
         time.sleep(1.75)
 
-def liczba():
+def liczba(L):
     i = 0
     while True:
         print(i)
         i+=1
-
+        print(L)
         time.sleep(1)
 
 
 def runInParallel(*fns):
-  proc = []
-  for fn in fns:
-    p = Process(target=fn)
-    p.start()
-    proc.append(p)
-  for p in proc:
-    p.join()
+    with Manager() as manager:
+        L = manager.list()
+
+        processes = []
+        for fn in fns:
+            p = Process(target=fn, args=(L,))
+            p.start()
+            processes.append(p)
+        for p in processes:
+            p.join()
 
 
 
 
 if __name__ == '__main__':
-	#pool = Pool(processes=2)
 
     runInParallel(dupa, liczba)
-	#pool.apply_async(display_menu())
-	#pool.apply_async(speech.Run())
-
-#	main_thread = Process(target=dupa())
-#	speech_thread = Process(target=liczba())
-#	main_thread.daemon = True  # Daemonize thread
- #   main_thread.
-
-
-
-#	main_thread.start()
-#	speech_thread.start()
-
-#	main_thread.join()
-#	speech_thread.join()
