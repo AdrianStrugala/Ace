@@ -15,7 +15,6 @@ def Run():
 			engine.say(list_to_say[0])
 			engine.runAndWait()
 
-		print('xd')
 		time.sleep(interval)
 
 
