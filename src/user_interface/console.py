@@ -18,7 +18,6 @@ import os
 import sys
 
 
-
 @contextmanager
 def cd(newdir):
     prevdir = os.getcwd()
@@ -31,7 +30,7 @@ def cd(newdir):
 
 def sendMessage(text):
     print(f'{colorama.Fore.LIGHTRED_EX}{text}{colorama.Fore.RESET}')
-
+    #list_to_say.append("Hello. My name is Ace!")
 
 def print_user_options():
     print("1 - Create Database")
@@ -64,14 +63,14 @@ def display_menu(list_to_say, fileno):
 
 
     sendMessage("Hello. My name is Ace!")
-    list_to_say.append("Hello. My name is Ace!")
+    #list_to_say.append("Hello. My name is Ace!")
 
     user_choice = -1
 
     while user_choice != 0:
         sendMessage("")
         sendMessage("Make your choice")
-        list_to_say.append("Make your choice")
+      #  list_to_say.append("Make your choice")
 
         print_user_options()
 
