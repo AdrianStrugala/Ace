@@ -5,7 +5,7 @@ os.system('python -m pip install --upgrade -r requirements.txt')
 
 from chat import speech
 from multiprocessing import Process, Manager
-from graphical_user_interface import GUI
+from user_interface import console
 
 
 
@@ -25,4 +25,4 @@ def runInParallel(*fns):
 
 
 if __name__ == '__main__':
-    runInParallel(speech.Run, GUI.display_menu)
+    runInParallel(speech.Run, console.display_menu)
