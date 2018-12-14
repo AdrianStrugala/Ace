@@ -61,19 +61,21 @@ def case(*args):
 this = sys.modules[__name__]
 
 this.list_to_say = []
+this.exit_flag = []
 
-def display_menu(shared_list_to_say, fileno):
+def display_menu(shared_list_to_say, fileno, shared_exit_flag):
     this.list_to_say = shared_list_to_say
+    this.exit_flag = shared_exit_flag
     os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
     sys.stdin = os.fdopen(fileno)  # open stdin in this process
 
-    sendMessage("Yo. I'm is Ace!")
+    sendMessage("Yo. I'm Ace!")
 
     user_choice = -1
 
     while user_choice != 0:
         sendMessage("")
-        sendMessage("Lets go")
+        sendMessage("Let's go")
 
         print_user_options()
 
@@ -153,12 +155,12 @@ def display_menu(shared_list_to_say, fileno):
                     sendMessage("Gathering vocabulary")
                     #   create_database.Execute()
                     #  create_training_data.Execute()
-                    with cd(os.getcwd() + "\AI_nmt\setup"):
+                    with cd(os.getcwd() + "\chat\AI_nmt\setup"):
                         sendMessage("Preparing data for train")
                     #	subprocess.call("py .\prepare_data.py")
 
                     # outside the context manager we are back wherever we started.
-                    with cd(os.getcwd() + "\AI_nmt"):
+                    with cd(os.getcwd() + "\chat\AI_nmt"):
                         sendMessage("The training begins now!")
                         sendMessage(os.getcwd())
                         subprocess.call("python -c \"from train import Execute; Execute()\"")
@@ -170,9 +172,8 @@ def display_menu(shared_list_to_say, fileno):
 
             if case(0):
                 sendMessage("Exiting")
-
+                this.exit_flag.append(1)
                 break
 
 
             # sendMessage(inference(user_choice))
-    sys.exit()
