@@ -18,6 +18,7 @@ import os
 import sys
 
 
+
 @contextmanager
 def cd(newdir):
     prevdir = os.getcwd()
@@ -30,19 +31,19 @@ def cd(newdir):
 
 def sendMessage(text):
     print(f'{colorama.Fore.LIGHTRED_EX}{text}{colorama.Fore.RESET}')
-    #list_to_say.append("Hello. My name is Ace!")
+    this.list_to_say.append(text)
 
 def print_user_options():
-    print("1 - Create Database")
-    print("2 - Open Program")
-    print("3 - Close Program")
-    print("4 - Open Website")
-    print("5 - Search in Google")
-    print("6 - Clear Database")
-    print("7 - Manually add program to the Database")
-    print("8 - Teach me how to speak")
-    print("")
-    print("0 - Exit")
+    sendMessage("1 - Create Database")
+    sendMessage("2 - Open Program")
+    sendMessage("3 - Close Program")
+    sendMessage("4 - Open Website")
+    sendMessage("5 - Search in Google")
+    sendMessage("6 - Clear Database")
+    sendMessage("7 - Manually add program to the Database")
+    sendMessage("8 - Teach me how to speak")
+    sendMessage("")
+    sendMessage("0 - Exit")
 
 
 class switch(object):
@@ -56,21 +57,22 @@ class switch(object):
 def case(*args):
     return any((arg == switch.value for arg in args))
 
+this = sys.modules[__name__]
 
-def display_menu(list_to_say, fileno):
+this.list_to_say = []
+
+def display_menu(shared_list_to_say, fileno):
+    this.list_to_say = shared_list_to_say
     os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
     sys.stdin = os.fdopen(fileno)  # open stdin in this process
 
-
-    sendMessage("Hello. My name is Ace!")
-    #list_to_say.append("Hello. My name is Ace!")
+    sendMessage("Yo. I'm is Ace!")
 
     user_choice = -1
 
     while user_choice != 0:
         sendMessage("")
-        sendMessage("Make your choice")
-      #  list_to_say.append("Make your choice")
+        sendMessage("Lets go")
 
         print_user_options()
 
@@ -83,7 +85,7 @@ def display_menu(list_to_say, fileno):
                     create_programs_database.Execute()
                 except Exception as e:
                     sendMessage("Cannot create database")
-                    print(e)
+                    sendMessage(e)
                 break
 
             if case(2):
@@ -93,7 +95,7 @@ def display_menu(list_to_say, fileno):
                     open_program.Execute(program_to_open)
                 except Exception as e:
                     sendMessage("Cannot open " + program_to_open)
-                    print(e)
+                    sendMessage(e)
                 break
 
             if case(3):
@@ -103,7 +105,7 @@ def display_menu(list_to_say, fileno):
                     close_program.Execute(program_to_close)
                 except Exception as e:
                     sendMessage("Cannot close" + program_to_close)
-                    print(e)
+                    sendMessage(e)
                 break
 
             if case(4):
@@ -113,7 +115,7 @@ def display_menu(list_to_say, fileno):
                     open_website.Execute(url_to_open)
                 except Exception as e:
                     sendMessage("Cannot navigate to" + url_to_open)
-                    print(e)
+                    sendMessage(e)
                 break
 
             if case(5):
@@ -123,7 +125,7 @@ def display_menu(list_to_say, fileno):
                     google_phrase.Execute(phrase_to_search)
                 except Exception as e:
                     sendMessage("Cannot find " + phrase_to_search + " in Google")
-                    print(e)
+                    sendMessage(e)
                 break
 
             if case(6):
@@ -132,7 +134,7 @@ def display_menu(list_to_say, fileno):
                     clear_programs_database.Execute()
                 except Exception as e:
                     sendMessage("Cannot clear database")
-                    print(e)
+                    sendMessage(e)
                 break
 
             if case(7):
@@ -141,7 +143,7 @@ def display_menu(list_to_say, fileno):
                     add_program_manually.Execute()
                 except Exception as e:
                     sendMessage("Cannot add program")
-                    print(e)
+                    sendMessage(e)
                 break
 
             if case(8):
@@ -157,17 +159,17 @@ def display_menu(list_to_say, fileno):
                     # outside the context manager we are back wherever we started.
                     with cd(os.getcwd() + "\AI_nmt"):
                         sendMessage("The training begins now!")
-                        print(os.getcwd())
+                        sendMessage(os.getcwd())
                         subprocess.call("python -c \"from train import Execute; Execute()\"")
 
                 except Exception as e:
                     sendMessage("I still cannot speak :(")
-                    print(e)
+                    sendMessage(e)
                 break
 
             if case(0):
                 sendMessage("Exiting")
                 break
 
-            # print(inference(user_choice))
+            # sendMessage(inference(user_choice))
             break
