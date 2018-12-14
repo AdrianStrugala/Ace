@@ -1,5 +1,4 @@
 import pyttsx3
-import threading
 import time
 
 interval = 0.5

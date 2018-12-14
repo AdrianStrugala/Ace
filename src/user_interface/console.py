@@ -170,9 +170,9 @@ def display_menu(shared_list_to_say, fileno):
 
             if case(0):
                 sendMessage("Exiting")
-                pid = os.getpid()
-                os.kill(pid, 1)
+                sys.exit(1)
                 break
 
+
             # sendMessage(inference(user_choice))
-            break
+    return

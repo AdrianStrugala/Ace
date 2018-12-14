@@ -27,11 +27,12 @@ if __name__ == '__main__':
         p2.start()
         processes.append(p2)
 
-      #  p.join()
+       # p.join()
 
-        while(p.is_alive()):
+        while(True):
+           # print(2)
             time.sleep(1)
-       # print ("Child process state: %d" % p.is_alive())
+            print ("Child process state: %d" % p.is_alive())
 
         # for p in processes:
         #     p.join()
