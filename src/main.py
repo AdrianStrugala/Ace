@@ -7,6 +7,8 @@ from chat import speech
 from multiprocessing import Process, Manager
 from user_interface import console
 
+import time
+
 
 
 if __name__ == '__main__':
@@ -16,12 +18,20 @@ if __name__ == '__main__':
         processes = []
 
         p = Process(target=speech.Run, args=(list_to_say,))
+        p.daemon = True
         p.start()
         processes.append(p)
 
         p2 = Process(target=console.display_menu, args=(list_to_say, stdin))
+        p2.daemon = True
         p2.start()
         processes.append(p2)
 
-        for p in processes:
-            p.join()
+      #  p.join()
+
+        while(p.is_alive()):
+            time.sleep(1)
+       # print ("Child process state: %d" % p.is_alive())
+
+        # for p in processes:
+        #     p.join()

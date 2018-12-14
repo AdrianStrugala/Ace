@@ -15,6 +15,7 @@ import subprocess
 import colorama
 from contextlib import contextmanager
 import os
+import signal
 import sys
 
 
@@ -169,6 +170,8 @@ def display_menu(shared_list_to_say, fileno):
 
             if case(0):
                 sendMessage("Exiting")
+                pid = os.getpid()
+                os.kill(pid, 1)
                 break
 
             # sendMessage(inference(user_choice))
