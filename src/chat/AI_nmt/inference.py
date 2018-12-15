@@ -194,16 +194,24 @@ def inference(questions, print = False):
 
     # Process questions
     answers_list = process_questions(questions)
-    #answers = answers_list[0]
+    answers = answers_list[0]
 
     # Revert current working directory
     os.chdir(original_cwd)
 
-    # Return (one or more?)
-    if not isinstance(questions, list):
-        return answers_list[0]
+    if answers is None:
+        return(colorama.Fore.RED + "! Question can't be empty" + colorama.Fore.RESET)
     else:
-        return answers_list
+        if answers['scores'][answers['best_index']] < score_settings['bad_response_threshold']:
+            return("Sorry. I don't even know what to say :(")
+        else:
+            return(answers['answers'][answers['best_index']])
+
+    # # Return (one or more?)
+    # if not isinstance(questions, list):
+    #     return answers_list[0]
+    # else:
+    #     return answers_list
 
 # Internal inference function (for direct call)
 def inference_internal(questions):
@@ -280,17 +288,17 @@ def process_questions(questions, return_score_modifiers = False):
 # interactive mode
 if __name__ == "__main__":
 
-    # Input file
-    if sys.stdin.isatty() == False:
-
-        # Process questions
-        answers_list = process_questions(sys.stdin.readlines())
-
-        # Print answers
-        for answers in answers_list:
-            print(answers['answers'][answers['best_index']])
-
-        sys.exit()
+    # # Input file
+    # if sys.stdin.isatty() == False:
+    #
+    #     # Process questions
+    #     answers_list = process_questions(sys.stdin.readlines())
+    #
+    #     # Print answers
+    #     for answers in answers_list:
+    #         print(answers['answers'][answers['best_index']])
+    #
+    #     sys.exit()
 
     # Interactive mode
     colorama.init()
