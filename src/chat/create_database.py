@@ -12,6 +12,7 @@ config.read('..\config.ini')
 
 db = config['CHAT']['DB_NAME']
 source_file = config['CHAT']['SOURCE_FILE_NAME']
+data_folder = "./AI_nmt/new_data"
 
 sql_transaction = []
 
@@ -23,7 +24,7 @@ def Execute():
     row_counter = 0
 
     print(f"Fetching data from {source_file}:")
-    with open(f'./temp/{source_file}', buffering=10000) as file:
+    with open(f'{data_folder}/{source_file}', buffering=10000) as file:
         for row in file:
 
             row_counter += 1
