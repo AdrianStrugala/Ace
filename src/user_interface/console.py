@@ -160,10 +160,12 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     #	subprocess.call("py .\prepare_data.py")
 
                     # outside the context manager we are back wherever we started.
-                    with cd(os.getcwd() + "\chat\AI_nmt"):
-                        sendMessage("The training begins now!")
-                        sendMessage(os.getcwd())
-                        subprocess.call("python -c \"from train import Execute; Execute()\"")
+                    # with cd(os.getcwd() + "\chat\AI_nmt"):
+                    #     sendMessage("The training begins now!")
+                    #     subprocess.call("python -c \"from train import Execute; Execute()\"")
+                    with cd(os.getcwd() + r"\chat\AI_nmt\utils"):
+                        sendMessage("Extracting files to deploy")
+                        subprocess.call("python prepare_for_deployment.py")
 
                 except Exception as e:
                     sendMessage("I still cannot speak :(")

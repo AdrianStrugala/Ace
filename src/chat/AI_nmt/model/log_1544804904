@@ -1,2 +1,13 @@
 # log_file=model/log_1544804904
 # Start step 0, lr 0.001, Fri Dec 14 17:28:31 2018
+  step 100 lr 0.001 step-time 1.46s wps 3.89K ppl 1528.61 gN 36.07 bleu 0.00, Fri Dec 14 17:30:58 2018
+  step 200 lr 0.001 step-time 1.36s wps 4.07K ppl 604.55 gN 13.20 bleu 0.00, Fri Dec 14 17:33:14 2018
+  step 300 lr 0.001 step-time 1.46s wps 3.91K ppl 370.99 gN 11.30 bleu 0.00, Fri Dec 14 17:35:40 2018
+  step 400 lr 0.001 step-time 1.42s wps 3.94K ppl 306.49 gN 9.35 bleu 0.00, Fri Dec 14 17:38:02 2018
+  step 500 lr 0.001 step-time 1.43s wps 3.94K ppl 266.42 gN 8.62 bleu 0.00, Fri Dec 14 17:40:25 2018
+  step 600 lr 0.001 step-time 1.42s wps 3.94K ppl 244.57 gN 8.55 bleu 0.00, Fri Dec 14 17:42:47 2018
+  step 700 lr 0.001 step-time 1.35s wps 4.17K ppl 223.32 gN 8.22 bleu 0.00, Fri Dec 14 17:45:02 2018
+  step 800 lr 0.001 step-time 1.34s wps 4.18K ppl 207.12 gN 7.63 bleu 0.00, Fri Dec 14 17:47:16 2018
+  step 900 lr 0.001 step-time 1.34s wps 4.19K ppl 202.24 gN 7.86 bleu 0.00, Fri Dec 14 17:49:30 2018
+# Final, step 921 lr 0.001 step-time 1.34s wps 4.19K ppl 202.24 gN 7.86 dev ppl 149.99, dev bleu 0.0, test ppl 149.99, test bleu 0.0, Fri Dec 14 17:57:45 2018
+# Best bleu, step 0 lr 0.001 step-time 1.34s wps 4.19K ppl 202.24 gN 7.86 dev ppl 52711.86, test ppl 52711.84, Fri Dec 14 17:57:48 2018

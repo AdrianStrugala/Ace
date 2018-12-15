@@ -1,0 +1,13 @@
+# log_file=model/log_1544808882
+# Start step 1842, lr 1e-05, Fri Dec 14 18:43:00 2018
+  step 1942 lr 1e-05 step-time 1.39s wps 4.04K ppl 139.46 gN 7.35 bleu 0.00, Fri Dec 14 18:45:20 2018
+  step 2042 lr 1e-05 step-time 1.35s wps 4.19K ppl 137.38 gN 7.24 bleu 0.00, Fri Dec 14 18:47:34 2018
+  step 2142 lr 1e-05 step-time 1.34s wps 4.18K ppl 136.98 gN 7.35 bleu 0.00, Fri Dec 14 18:49:49 2018
+  step 2242 lr 1e-05 step-time 1.33s wps 4.18K ppl 137.66 gN 7.31 bleu 0.00, Fri Dec 14 18:52:02 2018
+  step 2342 lr 1e-05 step-time 1.35s wps 4.20K ppl 136.31 gN 7.48 bleu 0.00, Fri Dec 14 18:54:17 2018
+  step 2442 lr 1e-05 step-time 1.33s wps 4.16K ppl 137.57 gN 7.33 bleu 0.00, Fri Dec 14 18:56:30 2018
+  step 2542 lr 1e-05 step-time 1.35s wps 4.17K ppl 139.70 gN 7.44 bleu 0.00, Fri Dec 14 18:58:45 2018
+  step 2642 lr 1e-05 step-time 1.35s wps 4.18K ppl 137.90 gN 7.49 bleu 0.00, Fri Dec 14 19:01:00 2018
+  step 2742 lr 1e-05 step-time 1.35s wps 4.19K ppl 135.50 gN 7.50 bleu 0.00, Fri Dec 14 19:03:15 2018
+# Final, step 2763 lr 1e-05 step-time 1.35s wps 4.19K ppl 135.50 gN 7.50 dev ppl 129.45, dev bleu 0.0, test ppl 129.45, test bleu 0.0, Fri Dec 14 19:12:02 2018
+# Best bleu, step 0 lr 1e-05 step-time 1.35s wps 4.19K ppl 135.50 gN 7.50 dev ppl 54328.30, test ppl 54328.31, Fri Dec 14 19:12:04 2018

@@ -1,0 +1,12 @@
+pywin32
+psutil
+pyttsx3
+wheel
+pandas
+pypiwin32
+tensorflow-gpu==1.4.0
+tqdm
+colorama
+regex
+python-Levenshtein
+requests

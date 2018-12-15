@@ -12,3 +12,4 @@ src/programs.db
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/workspace.xml
+src/chat/AI_nmt/model/translate.ckpt-2763.data-00000-of-00001
