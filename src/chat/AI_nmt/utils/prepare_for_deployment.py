@@ -81,14 +81,18 @@ for index, checkpoint in enumerate(checkpoints):
     print("{}{}.{} {}{}".format(colorama.Fore.GREEN, index + 1, colorama.Fore.RESET, '*' if checkpoint in default_checkpoint else '', checkpoint))
     if checkpoint in default_checkpoint:
         default_index = index + 1
-print("{}quit{}. Quit tool".format(colorama.Fore.GREEN, colorama.Fore.RESET))
 
 
 choice = default_index
 
-
 # Static list of files to be copied for any settings
-paths = ['core', 'nmt', 'setup/settings.py', 'setup/answers_replace.txt', 'setup/answers_subsentence_score.txt', 'utils/run_tensorboard.py', 'inference.py', 'requirements.txt', hparams['out_dir'] + 'hparams']
+paths = ['core',
+         'nmt',
+         'setup',
+         'utils',
+         'inference.py',
+         'train.py',
+         hparams['out_dir'] + 'hparams']
 
 # Append source vocab
 paths.append(hparams['vocab_prefix'] + '.' + hparams['src'])
