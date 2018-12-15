@@ -7,9 +7,36 @@ import errno
 import shutil
 import time
 import colorama
-
+import zipfile
 
 colorama.init()
+
+
+MAX = 99*1024*1024         # 99 Mb    - max chapter size
+BUF = 50*1024*1024*1024    # 50GB     - memory buffer size
+
+
+def file_split(FILE, MAX):
+    '''Split file into pieces, every size is  MAX = 15*1024*1024 Byte'''
+    chapters = 1
+    uglybuf = ''
+    with open(FILE, 'rb') as src:
+        while True:
+            tgt = open(FILE + '.%03d' % chapters, 'wb')
+            written = 0
+            while written < MAX:
+                if len(uglybuf) > 0:
+                    tgt.write(uglybuf)
+                tgt.write(src.read(min(BUF, MAX - written)))
+                written += min(BUF, MAX - written)
+                uglybuf = src.read(1)
+                if len(uglybuf) == 0:
+                    break
+            tgt.close()
+            if len(uglybuf) == 0:
+                break
+            chapters += 1
+
 
 # Copy file or folder recursively
 def copy(path):
@@ -154,5 +181,16 @@ while True:
             time.sleep(1)
             continue
     break
+
+outputZIP = 'kupa.zip'
+
+# writing files to a zipfile
+with zipfile.ZipFile(outputZIP,'w') as zip:
+    zip.write(file_path)
+
+print('All files zipped successfully!')
+
+file_split(outputZIP, MAX)
+
 
 print('\n{}Done. You can find deployment-ready copy of chatbot in _deployment folder{}\n\n'.format(colorama.Fore.GREEN, colorama.Fore.RESET))
