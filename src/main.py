@@ -9,6 +9,7 @@ from multiprocessing import Process, Manager
 from user_interface import console
 
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 
 if __name__ == '__main__':

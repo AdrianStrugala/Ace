@@ -8,7 +8,7 @@ from . import comment_model
 import configparser
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('..\config.ini')
 
 db = config['CHAT']['DB_NAME']
 source_file = config['CHAT']['SOURCE_FILE_NAME']
