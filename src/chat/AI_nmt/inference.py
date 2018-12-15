@@ -187,7 +187,7 @@ inference_object = None
 inference_helper = start_inference
 
 # Main inference function
-def inference(questions, print = False):
+def answer(questions, print = False):
 
     # Change current working directory (needed to load relative paths properly)
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
@@ -284,47 +284,5 @@ def process_questions(questions, return_score_modifiers = False):
             prepared_answers_list.append({'answers': answers, 'scores': answers_score['score'], 'best_index': best_index, 'best_score': best_score})
 
     return prepared_answers_list
-
-# interactive mode
-if __name__ == "__main__":
-
-    # # Input file
-    # if sys.stdin.isatty() == False:
-    #
-    #     # Process questions
-    #     answers_list = process_questions(sys.stdin.readlines())
-    #
-    #     # Print answers
-    #     for answers in answers_list:
-    #         print(answers['answers'][answers['best_index']])
-    #
-    #     sys.exit()
-
-    # Interactive mode
-    colorama.init()
-    print("\n\nStarting interactive mode (first response will take a while):")
-
-    # Specified model
-    if len(sys.argv) >= 2 and sys.argv[1]:
-        checkpoint = hparams['out_dir'] + str(sys.argv[1])
-        hparams['ckpt'] = checkpoint
-        print("Using checkpoint: {}".format(checkpoint))
-
-    # QAs
-    while True:
-        question = input("\n> ")
-        answers = inference_internal(question)[0]
-        if answers is None:
-            print(colorama.Fore.RED + "! Question can't be empty" + colorama.Fore.RESET)
-        else:
-            if answers['scores'][answers['best_index']] < score_settings['bad_response_threshold']:
-                print("Sorry. I don't even know what to say :(")
-            else:
-                print(answers['answers'][answers['best_index']])
-
-            # You may print all the possible answers here
-            # print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-            # for i, _ in enumerate(answers['scores']):
-            #     print("{}- {}{} [{}] {}{}{}".format(colorama.Fore.GREEN if answers['scores'][i] == max(answers['scores']) and answers['scores'][i] >= score_settings['bad_response_threshold'] else colorama.Fore.YELLOW if answers['scores'][i] >= score_settings['bad_response_threshold'] else colorama.Fore.RED, answers['answers'][i], colorama.Fore.RESET, answers['scores'][i], colorama.Fore.BLUE, answers['score_modifiers'][i] if score_settings['show_score_modifiers'] else '', colorama.Fore.RESET))
 
 os.chdir(original_cwd)

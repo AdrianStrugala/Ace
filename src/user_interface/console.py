@@ -10,7 +10,7 @@ from programs import close_program
 from programs import add_program_manually
 # from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
 # from chat.AI_nmt import train
-from chat.AI_nmt.inference import inference
+from chat.AI_nmt.inference import answer
 import subprocess
 import colorama
 from contextlib import contextmanager
@@ -45,6 +45,8 @@ def print_user_options():
     print("8 - Teach me how to speak")
     print("")
     print("0 - Exit")
+    print("")
+    print("")
 
 
 class switch(object):
@@ -78,10 +80,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
         sendMessage("Let's go")
 
         print_user_options()
-
-       # user_choice = int(input('Choice: '))
-
-        user_choice = input(('Choice: '))
+        user_choice = input(('You: '))
 
 
         while switch(user_choice):
@@ -180,5 +179,5 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                 this.exit_flag.append(1)
                 break
 
-            sendMessage(inference(user_choice))
+            sendMessage(answer(user_choice))
             break
