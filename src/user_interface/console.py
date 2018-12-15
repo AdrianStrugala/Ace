@@ -73,7 +73,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 
     user_choice = -1
 
-    while user_choice != 0:
+    while user_choice != "0":
         sendMessage("")
         sendMessage("Let's go")
 
@@ -85,7 +85,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 
 
         while switch(user_choice):
-            if case(1):
+            if case("1"):
                 sendMessage("Creating Database...")
                 try:
                     create_programs_database.Execute()
@@ -94,7 +94,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     sendMessage(e)
                 break
 
-            if case(2):
+            if case("2"):
                 program_to_open = input('Type name of the program: ')
                 sendMessage("Opening Program... " + program_to_open)
                 try:
@@ -104,7 +104,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     sendMessage(e)
                 break
 
-            if case(3):
+            if case("3"):
                 program_to_close = input('Type name of the program: ')
                 sendMessage("Closing Program... " + program_to_close)
                 try:
@@ -114,7 +114,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     sendMessage(e)
                 break
 
-            if case(4):
+            if case("4"):
                 url_to_open = input('Write the url: ')
                 sendMessage("Opening website... " + url_to_open)
                 try:
@@ -124,7 +124,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     sendMessage(e)
                 break
 
-            if case(5):
+            if case("5"):
                 phrase_to_search = input('What are you looking for: ')
                 sendMessage("Searching in Google for... " + phrase_to_search)
                 try:
@@ -134,7 +134,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     sendMessage(e)
                 break
 
-            if case(6):
+            if case("6"):
                 sendMessage("Clearing database...")
                 try:
                     clear_programs_database.Execute()
@@ -143,7 +143,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     sendMessage(e)
                 break
 
-            if case(7):
+            if case("7"):
                 sendMessage("Adding program...")
                 try:
                     add_program_manually.Execute()
@@ -152,7 +152,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     sendMessage(e)
                 break
 
-            if case(8):
+            if case("8"):
                 sendMessage("Learning how to speak...")
                 try:
                     sendMessage("Gathering vocabulary")
@@ -175,10 +175,10 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                     sendMessage(e)
                 break
 
-            if case(0):
+            if case("0"):
                 sendMessage("Exiting")
                 this.exit_flag.append(1)
                 break
 
-            print(inference(user_choice))
+            sendMessage(inference(user_choice))
             break
