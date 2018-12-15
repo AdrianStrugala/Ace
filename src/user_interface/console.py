@@ -10,7 +10,7 @@ from programs import close_program
 from programs import add_program_manually
 # from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
 # from chat.AI_nmt import train
-# from chat.AI_nmt.inference import inference
+from chat.AI_nmt.inference import inference
 import subprocess
 import colorama
 from contextlib import contextmanager
@@ -79,7 +79,10 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 
         print_user_options()
 
-        user_choice = int(input('Choice: '))
+       # user_choice = int(input('Choice: '))
+
+        user_choice = input(('Choice: '))
+
 
         while switch(user_choice):
             if case(1):
@@ -177,5 +180,5 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
                 this.exit_flag.append(1)
                 break
 
-
-            # sendMessage(inference(user_choice))
+            print(inference(user_choice))
+            break
