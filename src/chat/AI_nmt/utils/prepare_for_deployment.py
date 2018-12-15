@@ -83,30 +83,9 @@ for index, checkpoint in enumerate(checkpoints):
         default_index = index + 1
 print("{}quit{}. Quit tool".format(colorama.Fore.GREEN, colorama.Fore.RESET))
 
-# Ask for checkpoint to include in a copy
-while True:
 
-    print("\n{}Choose checkpoint [1-{}], quit or empty for default ({}):{} ".format(colorama.Fore.GREEN, index + 1, default_index, colorama.Fore.RESET), end='')
-    choice = input()
+choice = default_index
 
-    # Empty - default checkpoint
-    if not choice:
-        choice = default_index
-
-    # Quit
-    if choice == 'quit':
-        print('{}Quitting{}'.format(colorama.Fore.GREEN,colorama.Fore.RESET))
-        sys.exit()
-
-    # Check if number and if in range of available checkpoints
-    try:
-        choice = int(choice)
-        assert choice in range(1, index + 2)
-    except:
-        print('{}Incorrect choice{}'.format(colorama.Fore.RED, colorama.Fore.RESET))
-        continue
-    break
-print()
 
 # Static list of files to be copied for any settings
 paths = ['core', 'nmt', 'setup/settings.py', 'setup/answers_replace.txt', 'setup/answers_subsentence_score.txt', 'utils/run_tensorboard.py', 'inference.py', 'requirements.txt', hparams['out_dir'] + 'hparams']

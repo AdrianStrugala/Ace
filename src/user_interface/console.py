@@ -154,17 +154,17 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 			if case("8"):
 				sendMessage("Learning how to speak...")
 				try:
-					sendMessage("Gathering vocabulary")
-					create_database.Execute()
+					# sendMessage("Gathering vocabulary")
+					# create_database.Execute()
 					create_training_data.Execute()
-
-					with cd(os.getcwd() + "\AI_nmt\setup"):
-						sendMessage("Preparing data for train")
-						subprocess.call("py .\prepare_data.py")
-
-					with cd(os.getcwd() + "\AI_nmt"):
-						sendMessage("The training begins now!")
-						subprocess.call("python -c \"from train import Execute; Execute()\"")
+					#
+					# with cd(os.getcwd() + "\AI_nmt\setup"):
+					# 	sendMessage("Preparing data for train")
+					# 	subprocess.call("py .\prepare_data.py")
+					#
+					# with cd(os.getcwd() + "\AI_nmt"):
+					# 	sendMessage("The training begins now!")
+					# 	subprocess.call("python -c \"from train import Execute; Execute()\"")
 
 					with cd(os.getcwd() + r"\AI_nmt\utils"):
 						sendMessage("Extracting files to deploy")
