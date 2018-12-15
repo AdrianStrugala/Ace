@@ -1,3 +1,6 @@
+import os
+original_cwd = os.getcwd()
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 import sqlite3 as sql
 import json
 from datetime import datetime
@@ -13,6 +16,9 @@ source_file = config['CHAT']['SOURCE_FILE_NAME']
 sql_transaction = []
 
 def Execute():
+
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
     create_table()
     row_counter = 0
 
@@ -40,6 +46,9 @@ def Execute():
 
                 if row_counter % 100000 == 0:
                     print(f'Rows read: {row_counter}, Time: {str(datetime.now())}')
+
+    # Revert current working directory
+    os.chdir(original_cwd)
 
 def transaction_builder(sql_command):
     global sql_transaction
