@@ -182,6 +182,10 @@ while True:
             continue
     break
 
+
+
+os.chdir(os.path.dirname(os.path.realpath(__file__)) + '\_deployment')
+
 outputZIP = 'kupa.zip'
 
 # writing files to a zipfile
