@@ -186,7 +186,7 @@ outputZIP = 'kupa.zip'
 
 # writing files to a zipfile
 with zipfile.ZipFile(outputZIP,'w') as zip:
-    zip.write(file_path)
+    zip.write(r"C:\workspace\Ace\src\chat\AI_nmt\_deployment\model\translate.ckpt-2763.data-00000-of-00001")
 
 print('All files zipped successfully!')
 

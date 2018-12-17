@@ -8,9 +8,9 @@ from programs import clear_database as clear_programs_database
 from programs import open_program
 from programs import close_program
 from programs import add_program_manually
-from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
-from chat.AI_nmt import train
-from chat.AI_nmt.inference import answer
+#from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
+#from chat.AI_nmt import train
+#from chat.AI_nmt.inference import answer
 import subprocess
 import colorama
 from contextlib import contextmanager
@@ -180,5 +180,5 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 				this.exit_flag.append(1)
 				break
 
-			sendMessage(answer(user_choice))
+			# sendMessage(answer(user_choice))
 			break
