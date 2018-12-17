@@ -9,11 +9,14 @@ import time
 import colorama
 import zipfile
 
+original_cwd = os.getcwd()
+
+
 colorama.init()
 
 
 MAX = 99*1024*1024         # 99 Mb    - max chapter size
-BUF = 50*1024*1024*1024    # 50GB     - memory buffer size
+BUF = 6*1024*1024*1024    # 6GB     - memory buffer size
 
 
 def file_split(FILE, MAX):
@@ -183,18 +186,36 @@ while True:
     break
 
 
+# Zip checkpoint file - it is bigger than 100Mb
+os.chdir(os.path.dirname(os.path.realpath(__file__)) + '\_deployment\model')
 
-os.chdir(os.path.dirname(os.path.realpath(__file__)) + '\_deployment')
+#Find the bigest file in model folder
+biggest = ("", -1)
+dir = str(os.getcwd())
+for item in os.listdir(dir):
+    item = dir + "/" + item
 
-outputZIP = 'kupa.zip'
+    itemsize = os.path.getsize(item)
+    if itemsize > biggest[1]:
+            biggest = (item, itemsize)
+
+#Set up zip name
+zip_name = str(biggest[0] + '.zip')
 
 # writing files to a zipfile
-with zipfile.ZipFile(outputZIP,'w') as zip:
-    zip.write(r"C:\workspace\Ace\src\chat\AI_nmt\_deployment\model\translate.ckpt-2763.data-00000-of-00001")
+with zipfile.ZipFile(zip_name, 'w') as zip:
+    zip.write(biggest[0])
 
-print('All files zipped successfully!')
+# splitting zip into partitions
+file_split(zip_name, MAX)
 
-file_split(outputZIP, MAX)
+print('Zipps created successfully!')
 
+#remove files too big to be deployed
+os.remove(biggest[0])
+print('\n{}Removed: {}{}\n\n'.format(colorama.Fore.RED, biggest[0], colorama.Fore.RESET))
+os.remove(zip_name)
+print('\n{}Removed: {}{}\n\n'.format(colorama.Fore.RED, zip_name, colorama.Fore.RESET))
 
+os.chdir(original_cwd)
 print('\n{}Done. You can find deployment-ready copy of chatbot in _deployment folder{}\n\n'.format(colorama.Fore.GREEN, colorama.Fore.RESET))
