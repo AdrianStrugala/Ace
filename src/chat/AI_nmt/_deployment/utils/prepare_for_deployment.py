@@ -213,9 +213,9 @@ print('Zipps created successfully!')
 
 #remove files too big to be deployed
 os.remove(biggest[0])
-print('\n{}Removed{}{}\n\n'.format(colorama.Fore.RED, biggest[0], colorama.Fore.RESET))
+print('\n{}Removed: {}{}\n\n'.format(colorama.Fore.RED, biggest[0], colorama.Fore.RESET))
 os.remove(zip_name)
-print('\n{}Removed{}{}\n\n'.format(colorama.Fore.RED, zip_name, colorama.Fore.RESET))
+print('\n{}Removed: {}{}\n\n'.format(colorama.Fore.RED, zip_name, colorama.Fore.RESET))
 
 os.chdir(original_cwd)
 print('\n{}Done. You can find deployment-ready copy of chatbot in _deployment folder{}\n\n'.format(colorama.Fore.GREEN, colorama.Fore.RESET))
