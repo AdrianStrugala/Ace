@@ -150,7 +150,7 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 
 			if case("8"):
 
-				sendMessage("Say 'yes' if you really want spend few hours looking me learning")
+				sendMessage("Say 'yes' if you really want spend few hours looking me learning dude...")
 				user_input = input(('You: '))
 
 				if user_input == 'yes':
