@@ -3,7 +3,10 @@
 Ace is Artificial Intelligence agent enhancing possibilities of every personal computer. Contains
 modules responsible for live chat, web browsing and managing programs.
 
-## Technology: Python, Tensorflow, SQLite
+## Technology: 
+  * Python
+  * Tensorflow
+  * SQLite
 
 ## Requirements:
   * python 3.6
