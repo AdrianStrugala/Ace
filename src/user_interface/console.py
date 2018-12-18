@@ -2,15 +2,12 @@ from chat import create_database
 from chat import create_training_data
 from web_controller import open_website
 from web_controller import google_phrase
-from chat import speech
 from programs import create_database as create_programs_database
 from programs import clear_database as clear_programs_database
 from programs import open_program
 from programs import close_program
 from programs import add_program_manually
-#from chat.AI_nmt.setup import prepare_data as nmt_prepare_data
-#from chat.AI_nmt import train
-#from chat.AI_nmt.inference import answer
+from chat.AI_nmt.inference import answer
 import subprocess
 import colorama
 from contextlib import contextmanager
@@ -152,27 +149,32 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 				break
 
 			if case("8"):
-				sendMessage("Learning how to speak...")
-				try:
-					# sendMessage("Gathering vocabulary")
-					# create_database.Execute()
-					create_training_data.Execute()
-					#
-					# with cd(os.getcwd() + "\AI_nmt\setup"):
-					# 	sendMessage("Preparing data for train")
-					# 	subprocess.call("py .\prepare_data.py")
-					#
-					# with cd(os.getcwd() + "\AI_nmt"):
-					# 	sendMessage("The training begins now!")
-					# 	subprocess.call("python -c \"from train import Execute; Execute()\"")
 
-					with cd(os.getcwd() + r"\AI_nmt\utils"):
-						sendMessage("Extracting files to deploy")
-						subprocess.call("python prepare_for_deployment.py")
+				sendMessage("Say 'yes' if you really want spend few hours looking me learning")
+				user_input = input(('You: '))
 
-				except Exception as e:
-					sendMessage("I still cannot speak :(")
-					sendMessage(e)
+				if user_input == 'yes':
+					sendMessage("Learning how to speak...")
+					try:
+						sendMessage("Gathering vocabulary")
+						create_database.Execute()
+						create_training_data.Execute()
+
+						with cd(os.getcwd() + "\AI_nmt\setup"):
+							sendMessage("Preparing data for train")
+							subprocess.call("py .\prepare_data.py")
+
+						with cd(os.getcwd() + "\AI_nmt"):
+							sendMessage("The training begins now!")
+							subprocess.call("python -c \"from train import Execute; Execute()\"")
+
+						with cd(os.getcwd() + r"\AI_nmt\utils"):
+							sendMessage("Extracting files to deploy")
+							subprocess.call("python prepare_for_deployment.py")
+
+					except Exception as e:
+						sendMessage("I still cannot speak :(")
+						sendMessage(e)
 				break
 
 			if case("0"):
@@ -180,5 +182,5 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 				this.exit_flag.append(1)
 				break
 
-			# sendMessage(answer(user_choice))
+			sendMessage(answer(user_choice))
 			break
