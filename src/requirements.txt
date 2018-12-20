@@ -10,3 +10,5 @@ colorama
 regex
 python-Levenshtein
 requests
+speechrecognition
+pyaudio

@@ -7,12 +7,13 @@ from programs import clear_database as clear_programs_database
 from programs import open_program
 from programs import close_program
 from programs import add_program_manually
-from chat.AI_nmt.inference import answer
+#from chat.AI_nmt.inference import answer
 import subprocess
 import colorama
 from contextlib import contextmanager
 import os
 import sys
+import speech_recognition as sr
 
 
 
@@ -46,6 +47,30 @@ def print_user_options():
 	print("")
 
 
+def recognize_user_speech():
+
+	print("I am here")
+	mic = sr.Microphone()
+	r = sr.Recognizer()
+
+	with mic as source:
+		r.pause_threshold = 1
+		r.adjust_for_ambient_noise(source, duration=1)
+		audio = r.listen(source)
+
+	print("And here")
+
+	try:
+		user_choice = r.recognize_google(audio)
+	except sr.UnknownValueError:
+		user_choice = "I don't understand you"
+	except sr.RequestError as e:
+		print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
+	print("Google Speech Recognition thinks you said: " + user_choice)
+
+	return  user_choice
+
 class switch(object):
 	value = None
 
@@ -68,16 +93,22 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 	os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 	sys.stdin = os.fdopen(fileno)  # open stdin in this process
 
+	# recognizer = sr.Recognizer()
+	# microphone = sr.Microphone()
+
 	sendMessage("Yo. I'm Ace!")
 
-	user_choice = -1
+	sendMessage("")
+	sendMessage("Let's go")
+
+	print_user_options()
+
+
+	user_choice = "-1"
 
 	while user_choice != "0":
-		sendMessage("")
-		sendMessage("Let's go")
 
-		print_user_options()
-		user_choice = input(('You: '))
+		user_choice = recognize_user_speech()
 
 
 		while switch(user_choice):
@@ -182,5 +213,5 @@ def display_menu(shared_list_to_say, fileno, shared_exit_flag):
 				this.exit_flag.append(1)
 				break
 
-			sendMessage(answer(user_choice))
+			sendMessage(user_choice)
 			break
