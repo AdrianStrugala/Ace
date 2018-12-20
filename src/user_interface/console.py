@@ -67,8 +67,6 @@ def recognize_user_speech():
 	except sr.RequestError as e:
 		print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
-	print("Google Speech Recognition thinks you said: " + user_choice)
-
 	return  user_choice
 
 class switch(object):
