@@ -1,0 +1,7 @@
+1) Run the command (use your path to Python and desired version)
+
+$env:Path = "C:\Users\ext.adrian.strugala\AppData\Local\Programs\Python\Python36;C:\Users\ext.adria
+n.strugala\AppData\Local\Programs\Python\Python36\Scripts" + $env:Path
+
+
+2) Run commands using python (ex. python main.py) - NOT PY!!!

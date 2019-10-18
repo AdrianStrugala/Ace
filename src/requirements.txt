@@ -4,7 +4,7 @@ pyttsx3
 wheel
 pandas
 pypiwin32
-tensorflow-gpu==1.4.0
+tensorflow-gpu
 tqdm
 colorama
 regex
@@ -12,3 +12,5 @@ python-Levenshtein
 requests
 speechrecognition
 pyaudio
+pyttsx3
+win32api
