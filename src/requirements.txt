@@ -4,7 +4,7 @@ pyttsx3
 wheel
 pandas
 pypiwin32
-tensorflow-gpu==1.15.2
+tensorflow-gpu==2.6.4
 tqdm
 colorama
 regex
